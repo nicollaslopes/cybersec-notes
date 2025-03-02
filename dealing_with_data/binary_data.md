@@ -7,3 +7,4 @@ Binary is a number system that uses only the digits 0 and 1 to represent data. N
 **Binary (base 2) has digits 0, 1.**
 
 The binary system is the primary language of computing systems. Inside these systems, a binary number consists of a series of eight bits. This series is known as a `byte`. A binary digit is called a `bit`. In the binary schema, the position of each digit determines its decimal value. 
+
