@@ -20,3 +20,7 @@ We've talked about bits previously and our computer doesn't think about bits ind
 | **D**       | 13      | 15    | 1101    |
 | **E**       | 14      | 16    | 1110    |
 | **F**       | 15      | 17    | 1111    |
+
+Hexadecimal is a really useful representation for binary data. In the next example, we can look those first four digits (first four bits) `0110` is the same range as one hex digit number 6. On the right `1000` can be represent by another hex digit number eight.
+
+
