@@ -26,4 +26,4 @@ Hexadecimal is a really useful representation for binary data. In the next examp
 <figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 If you have a multiple bytes in you CPU and you want to represent multiple bytes in HEX, we can concatenate them.
 
-![[Pasted image 20250302091008.png]]
+We can also use hex to transmit binary data over channels where binary data is inconvenience to transfer.
