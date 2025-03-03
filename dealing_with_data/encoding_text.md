@@ -27,7 +27,7 @@ When we type *a*, the computer understands the byte 0x61 (97 in decimal). Simila
 
 You are probably thinking how difficult it is for computers to work with different text encodings, which is why we have Unicode.
 
-#### UTF-8
+### UTF-8
 
 The 8-bits UTF standard (*Unicode Transformation Format*) was created to cover all the possible characters in the various language on this planet.
 
@@ -42,7 +42,7 @@ We concluded that UTF-8 characters range from 1 to 4 bytes. Lets see how would b
 
 As said before, the codepoints in the ASCII table are the same in UTF-8, but the character *ã* (which doesn't exist in pure ASCII) uses 2 bytes (in this case, c3 a3) to be represented. This is a valid UTF-8 string. We can say its size is 11 because it contains 11 characters, but in bytes its size is 12. 
 
-#### UTF-16
+### UTF-16
 
 Represented in UTF-16, the characters in the ASCII table are 2 bytes long, where the first byte is the same as in the ASCII table and the second is a zero. For example, to write *A* in UTF-16, we would write: 41 00. Let's understand this better with the help of Python.
 
