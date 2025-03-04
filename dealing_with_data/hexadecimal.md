@@ -23,7 +23,7 @@ We've talked about bits previously and our computer doesn't think about bits ind
 
 Hexadecimal is a really useful representation for binary data. In the next example, we can look those first four digits (first four bits) `0110` is the same range as one hex digit number 6. On the right `1000` can be represent by another hex digit number eight.
 
-<figure><img src="broken-reference" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/hex-2 (1).png" alt=""><figcaption></figcaption></figure>
 
 If you have a multiple bytes in you CPU and you want to represent multiple bytes in HEX, we can concatenate them.
 
