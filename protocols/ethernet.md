@@ -4,6 +4,8 @@ The Ethernet protocol operates at layer 2 of the OSI model and is responsible fo
 
 The Ethernet protocol only knows physical addresses (Mac Address). The structure of an Ethernet frame is as follows:
 
+| Destination Mac Address | Source Mac Address | Type | Payload | Checksum |
+| ----------------------- | ------------------ | ---- | ------- | -------- |
 
 
 <figure><img src="../.gitbook/assets/ethernet-1.png" alt="img-ethernet"><figcaption></figcaption></figure>
