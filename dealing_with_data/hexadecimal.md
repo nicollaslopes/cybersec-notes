@@ -1,6 +1,6 @@
 # Hexadecimal
 
-We've talked about bits previously and our computer doesn't think about bits individually. It thinks about bits in groups, typically groups of eight which is called a byte. Hexadecimals has some advantages, starting with thee number of symbols: 16. They are 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E and F. The numbers they form are normally prefixed with `0x`.
+We've talked about bits previously and our computer doesn't think about bits individually. It thinks about bits in groups, typically groups of eight which is called a byte. Hexadecimals has some advantages, starting with thee number of symbols: 16. They are 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E and F. The numbers they form are normally prefixed with `0x`. 
 
 | Hexadecimal | Decimal | Octal | Binário |
 | ----------- | ------- | ----- | ------- |
