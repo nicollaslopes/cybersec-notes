@@ -14,7 +14,7 @@ Payload - contains the information that the protocol carries.
 
 There was a need for standardization to be used as a reference for software developers and hardware manufacturers in order to create products that were compatible with each other.
 
-The OSI Model (Open Systems Interconnection) is a conceptual model made up of 7 layers.&#x20;
+The OSI Model (Open Systems Interconnection) is a conceptual model made up of 7 layers.
 
 The TCP/IP Model consists of 4 layers and has become a simplification of the OSI model.
 
