@@ -6,7 +6,7 @@ The Ethernet protocol only knows physical addresses (Mac Address). The structure
 
 
 
-<figure><img src="broken-reference" alt="img-ethernet"><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/ethernet-1.png" alt="img-ethernet"><figcaption></figcaption></figure>
 
 * Destination Mac Address - contains the MAC address of the destination network interface. (_ff:ff:ff:ff:ff:ff_)
 * Source Mac Address - contains the mac address of the source network interface (_00:0c:29:76:43:e1_)
