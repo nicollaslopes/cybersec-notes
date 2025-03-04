@@ -22,7 +22,7 @@ When we type _a_, the computer understands the byte 0x61 (97 in decimal). Simila
 
 _Obs: the lowercase b creates an object of the `bytes` class instead of `str`._
 
-<figure><img src="broken-reference" alt=""><figcaption><p>ASCII Table</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/ascii-table.png" alt=""><figcaption></figcaption></figure>
 
 ## Unicode
 
