@@ -33,4 +33,4 @@ We can also use hex to transmit binary data over channels where binary data is i
 
 <div align="right"><figure><img src="../.gitbook/assets/xxd-1.png" alt=""><figcaption></figcaption></figure></div>
 
-<figure><img src="../.gitbook/assets/xxd-2 (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/xxd-2.png" alt=""><figcaption></figcaption></figure>
