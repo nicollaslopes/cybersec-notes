@@ -4,12 +4,13 @@ The TCP protocol is considered a reliable protocol for data transmission because
 
 Let's learn about the structure of the TCP Header:
 
-
+<figure><img src="../.gitbook/assets/tcp-1.png" alt=""><figcaption></figcaption></figure>
 
 As we can see below, we have the Ethernet frame with the source being the client host and the destination being the server host.
 
 Next we have the Internet Protocol Version 4 (IPv4 Protocol), we can see that the source is the IP address of the client host and the destination is the IP address of the server host.
 
+<figure><img src="../.gitbook/assets/tcp-2.png" alt=""><figcaption></figcaption></figure>
 
 And now we have the Transmission Control Protocol better known as TCP, let's analyze the TCP header information.
 
@@ -53,6 +54,7 @@ TCP is connection-oriented, meaning that it only transmits if it is certain that
 
 Three-way Handshake is the name given to the technique used to open a connection.
 
+<figure><img src="../.gitbook/assets/3whs.jpeg" alt=""><figcaption></figcaption></figure>
 
 As we can see in the image above, before the client host exchanges information with the server host, the connection is established by performing the three-way handshake.
 
