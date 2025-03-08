@@ -8,9 +8,11 @@ If DNS didn't exist, to access Facebook you would have to remember the address 1
 
 ## How does a domain work?
 
-When we access a website, to know which IP address the entry represents, it is done in a few steps. Our computer communicates with the root servers, and these root servers have a list of top-level domains. DNS resolution starts backwards, first the country of origin is consulted (which TLD is responsible for that domain), then the authoritative server is consulted, and then the subdomain is consulted. 
+When we access a website, to know which IP address the entry represents, it is done in a few steps. Our computer communicates with the root servers, and these root servers have a list of top-level domains. DNS resolution starts backwards, first the country of origin is consulted (which TLD is responsible for that domain), then the authoritative server is consulted, and then the subdomain is consulted.
 
 #### The 8 steps in a DNS lookup:
+
+<figure><img src="../.gitbook/assets/dns-1 (1).png" alt=""><figcaption></figcaption></figure>
 
 1. A user types ‘example.com’ into a web browser and the query travels into the Internet and is received by a DNS recursive resolver.
 2. The resolver then queries a DNS root nameserver (.).

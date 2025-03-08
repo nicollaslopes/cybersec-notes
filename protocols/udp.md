@@ -4,7 +4,7 @@ The UDP protocol, like TCP, is a data transport protocol. However, it is not rel
 
 Let's take a look at the UDP protocol header.
 
-<figure><img src="../.gitbook/assets/udp-1.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/udp-1 (1).png" alt=""><figcaption></figcaption></figure>
 
 As we can see, the UDP protocol header is very simple, having only source and destination port, size and checksum.
 
