@@ -14,9 +14,17 @@ Now, let's submit a login form to a website to test how a post request works.
 
 <figure><img src="../.gitbook/assets/http-2.png" alt=""><figcaption></figcaption></figure>
 
+In the image above, we can see on line 20 that a body was sent, containing the information we submitted in the form, in html encoding.
+
+## HTTP Status Codes
+
 To communicate from the front-end to the back-end, the HTTP protocol uses HTTP methods. They are:
 
-GET -> Read data from the server POST -> Send data to the server PUT -> Send data to the server (create/update) DELETE -> Delete data from the server PATCH -> Update data on the server.
+* **GET**: Read data from the server 
+* **POST**: Send data to the server 
+* **PUT**: Send data to the server (create/update) 
+* **DELETE**: Delete data from the server 
+* **PATCH**: Update data on the server.
 
 For every HTTP request we make to the server, it will respond with a status code. Each status code has a meaning. These are some of them:
 
