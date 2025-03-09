@@ -66,11 +66,11 @@ $ curl -v http://tibia.com
 Curl is really useful, we can send POST request using `-X POST` parameter. 
 
 ```bash
-$ curl -X POST http://www.tibia.com/account/?subtopic=accountmanagement -d "loginemail=test%40email.com&loginpassword=password&page=overview"
+$ curl -X POST http://tibia.com/account/?subtopic=accountmanagement -d "loginemail=test%40email.com&loginpassword=password&page=overview"
 ```
 
 We can also set some headers to make our requests with `-H` parameter.
 
 ```bash
-$ curl -v http://www.tibia.com -H "User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:136.0) Gecko/20100101 Firefox/136.0"
+$ curl -v http://tibia.com -H "User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:136.0) Gecko/20100101 Firefox/136.0"
 ```
