@@ -6,6 +6,8 @@ The basic ICMP structure of is simple, composed of types and codes, each with it
 
 <figure><img src="../.gitbook/assets/icmp-1.png" alt=""><figcaption></figcaption></figure>
 
+ICMP types:
+
 ## What is ICMP used for?
 
 The primary purpose of ICMP is for error reporting. When two devices connect over the Internet, the ICMP generates errors to share with the sending device in the event that any of the data did not get to its intended destination. For example, if a packet of data is too large for a router, the router will drop the packet and send an ICMP message back to the original source for the data.
