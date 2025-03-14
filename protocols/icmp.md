@@ -8,6 +8,8 @@ The basic ICMP structure of is simple, composed of types and codes, each with it
 
 ICMP types:
 
+<figure><img src="../.gitbook/assets/icmp-3.jpg" alt="" width="563"><figcaption></figcaption></figure>
+
 ## What is ICMP used for?
 
 The primary purpose of ICMP is for error reporting. When two devices connect over the Internet, the ICMP generates errors to share with the sending device in the event that any of the data did not get to its intended destination. For example, if a packet of data is too large for a router, the router will drop the packet and send an ICMP message back to the original source for the data.
@@ -26,4 +28,4 @@ Unlike the Internet Protocol (IP), ICMP is not associated with a transport layer
 
 A ping flood or ICMP flood is when the attacker attempts to overwhelm a targeted device with ICMP echo-request packets. The target has to process and respond to each packet, consuming its computing resources until legitimate users cannot receive service.
 
-<div align="center"><figure><img src="../.gitbook/assets/icmp-2.png" alt=""><figcaption></figcaption></figure></div>
+<div align="center"><figure><img src="../.gitbook/assets/icmp-2.png" alt="" width="563"><figcaption></figcaption></figure></div>
