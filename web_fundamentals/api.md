@@ -1,6 +1,6 @@
-# API (Application Programming Interface)
+# API 
 
-An API basically serves data/information to a client, interacting with some application.
+An API (**Application Programming Interface**) basically serves data/information to a client, interacting with some application.
 
 ### Types of API:
 
