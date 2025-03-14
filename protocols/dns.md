@@ -26,12 +26,7 @@ When we access a website, to know which IP address the entry represents, it is d
 ## What are DNS records?
 
 DNS records (also known as zone files) are instructions that reside on authoritative DNS servers and provide information about a domain, including which IP addresses are associated with that domain and how to handle requests for that domain. These records consist of a series of text files written in what is known as DNS syntax. DNS syntax is simply a string of characters used as commands that tell the DNS server what to do.
+
 #### What are the most common types of DNS records?
 
-**A** — This is the record that contains the IP address of a domain. 
-**AAAA** — This is a record that contains the IPv6 address for a domain (as opposed to A records, which list the IPv4 address). 
-**CNAME** — This points a domain or subdomain to another domain; it does NOT provide an IP address.
-**MX** — This directs email to a mail server.
-**TXT** — This allows an administrator to store text notes in the record. These records are often used for email security.
-**NS** — This stores the nameserver for a DNS entry. 
-**SOA** — This stores administrator information about a domain. 
+**A** — This is the record that contains the IP address of a domain. **AAAA** — This is a record that contains the IPv6 address for a domain (as opposed to A records, which list the IPv4 address). **CNAME** — This points a domain or subdomain to another domain; it does NOT provide an IP address. **MX** — This directs email to a mail server. **TXT** — This allows an administrator to store text notes in the record. These records are often used for email security. **NS** — This stores the nameserver for a DNS entry. **SOA** — This stores administrator information about a domain.

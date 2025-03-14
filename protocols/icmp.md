@@ -2,7 +2,9 @@
 
 The Internet Control Message Protocol (ICMP) is a network layer protocol used by network devices to diagnose network communication issues. ICMP is mainly used to determine whether or not data is reaching its intended destination in a timely manner. Commonly, the ICMP protocol is used on network devices, such as routers. ICMP is crucial for error reporting and testing, but it can also be used in distributed denial-of-service (DDoS) attacks.
 
-The basic ICMP structure of  is simple, composed of types and codes, each with its own function.
+The basic ICMP structure of is simple, composed of types and codes, each with its own function.
+
+<figure><img src="../.gitbook/assets/icmp-1.png" alt=""><figcaption></figcaption></figure>
 
 ## What is ICMP used for?
 
@@ -22,6 +24,4 @@ Unlike the Internet Protocol (IP), ICMP is not associated with a transport layer
 
 A ping flood or ICMP flood is when the attacker attempts to overwhelm a targeted device with ICMP echo-request packets. The target has to process and respond to each packet, consuming its computing resources until legitimate users cannot receive service.
 
-ICMP flood attack:
-
-
+<div align="center"><figure><img src="../.gitbook/assets/icmp-2.png" alt=""><figcaption></figcaption></figure></div>
