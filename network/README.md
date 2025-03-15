@@ -1,4 +1,6 @@
-# Protocols
+# Network
+
+A network is a group of connected computers that are able to send data to each other. A computer network is much like a social circle, which is a group of people who all know each other, regularly exchange information, and coordinate activities together.
 
 A computer network is the communication between two or more computers capable of exchanging information with each other. Each computer on the network can be called a **Host** and in a network we can have **client** and server **hosts**. The **server** is a host that provides some service to the network and the **client** is a host that consumes some service offered by a server.
 
@@ -19,3 +21,6 @@ The OSI Model (Open Systems Interconnection) is a conceptual model made up of 7 
 The TCP/IP Model consists of 4 layers and has become a simplification of the OSI model.
 
 <figure><img src="../.gitbook/assets/osi-model.png" alt=""><figcaption></figcaption></figure>
+
+
+https://www.guiafoca.org/guiaonline/avancado/ch04s02.html

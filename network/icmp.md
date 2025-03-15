@@ -28,4 +28,4 @@ Unlike the Internet Protocol (IP), ICMP is not associated with a transport layer
 
 A ping flood or ICMP flood is when the attacker attempts to overwhelm a targeted device with ICMP echo-request packets. The target has to process and respond to each packet, consuming its computing resources until legitimate users cannot receive service.
 
-<div align="center"><figure><img src="../.gitbook/assets/icmp-2.png" alt="" width="563"><figcaption></figcaption></figure></div>
+<div align="center"><figure><img src="../.gitbook/assets/icmp-2.png" alt=""><figcaption></figcaption></figure></div>
