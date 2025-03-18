@@ -14,6 +14,6 @@ In this way, autonomous systems allow companies and organizations to manage thei
 
 In short, ASs are fundamental to the functioning of the global Internet. They enable communication between different networks and ensure that network traffic is routed efficiently and reliably.
 
+<figure><img src="../.gitbook/assets/asn.png" alt=""><figcaption></figcaption></figure>
+
 We can see ASNs in Brazil here: https://ipinfo.io/countries/br#section-asns
-
-
