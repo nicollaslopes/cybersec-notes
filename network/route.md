@@ -1,7 +1,5 @@
 # Route
 
-Roteamento é quando uma máquina com múltiplas conexões de rede decide onde entregar os pacotes IP que recebeu. Para que assim os pacotes cheguem ao seu destino. 
-
 Routing is when a machine with multiple network connections decides where to deliver the IP packets it has received. So that the packets reach their destination. 
 
 ## How does routing work?
@@ -22,62 +20,46 @@ We can see this entire communication process using the `traceroute` command. For
 $ traceroute 1.1.1.1
 ```
 
+In the middle of this communication, there is a firewall, which basically works to control a network, allowing, denying or blocking access. 
 
-No meio dessa comunicação, existe um firewall, que basicamente serve para fazer o controle dentro de uma rede, permitindo, negando ou bloqueando acessos. 
-Nesse exemplo abaixo, podemos "simular" uma regra no firewall onde o computador A consegue acesso ao servidor do banco de dados porque existe uma regra no firewall que permite esse acesso
+In this example below, we can “simulate” a rule in the firewall where "computer A" can access the database server because there is a rule in the firewall that allows this access.
 
-Obs: não existe motivo colocar alguma regra de firewall de borda dentro de computadores da mesma rede (ex: notebook comunicando com computador A) porque isso não será filtrado pelo firewall, ou seja, a comunicação é feito direto entre eles.
+Note: there is no reason to place any edge firewall rule within computers on the same network (e.g.: "Notebook" communicating with "Computer A") because this will not be filtered by the firewall, that is, communication is done directly between them.
 
+Every computer has a routing table. If we can see the routing table, we can run this command below:
 
-Cada um dos computadores, possuem um route table
+```
+$ netstat -r
+```
 
-Se quiser ver a tabela de roteamento:
+In order to access a specific network on the internet, such as the Google network, accessing the Google website itself, or Facebook, etc., we need an internet provider, we can call it an ISP (Internet Service Provider), which will do the work of connecting our network with other networks.
 
-ip route netstat -r 
+Our computer has a route table, in the example, `0.0.0.0/0` means all addresses, that is, everything that is accessed will be forwarded to the router `192.168.0.1`
 
+When we make a request to Google, the router also doesn't know Google's address because it doesn't have it in its route table. Therefore, it will send the request to the provider (ISP).
 
+The ISP will receive a notification from Google, so Google will notify the provider that if it wants to communicate with the `100.100.250.0/24` network, it needs to send the request to the Google network entry `100.100.250.1`
 
-Para conseguirmos acesar uma determinada rede na internet, como por exemplo a rede do google, acessando o próprio site do google, ou o facebook e etc, precisamos de um provedor de internet, podemos chamar de ISP (Internet Service Provider), que irá fazer esse trabalho de conectar a nossa rede com outras redes.
+We call this communication between public networks **Autonomous Systems** (AS), because the communication is automatic, there is no one configuring **BGP**. However, this process is done through several routes, it is not directly from the provider to the Google network, we can trace the route with the command `traceroute`.
 
-No nosso computador temos uma route table, no exemplo, 0.0.0.0/0 significa todos os endereços, ou seja, tudo que for acessado, irá ser encaminhado para o roteador (192.168.0.1).
-
-Quando fazemos uma requisição para o google, o roteador também não sabe qual o endereço do google porque ele não tem na sua route table. Com isso, ele irá enviar a requisição para o provedor (isp).
-
-O ISP irá receber uma notificação do google, assim o google avisa pro provedor (vivo, claro), que se caso ele quiser comunicar com a rede (100.100.250.0/24) precisa enviar enviar
-a requisição para a entrada da rede do google (100.100.250.1)
-
-Essa comunicação entre as redes públicas, nós chamamos de sistemas autônomos (AS), porque a comunicação é  automática, não existe ninguém configurando o BGP.
-
-Porém, esse processo é feito por várias rotas, não é diretamente do provedor para a rede do google, podemos traçar a rota com o comando traceroute google.com
-
-E podemos consultar no https://ipinfo.io/ cada ip
-
-
-Comunicação:
+With the `traceroute` command, we can see all the IPs of the communication, from our computer until it reaches the destination IP, the communication passes through all of them. We can also use the website https://ipinfo.io/ to consult more about each one.
 
 192.168.0.62 -> 100.100.250.130
-
 100.100.250.130 -> 192.168.0.1
 100.100.250.130 -> 2.2.2.1
 
-Podemos ver todas as redes  da claro, que é um provedor no site; https://bgp.he.net/AS4230#_prefixes
+We can see all **Claro** networks, which is a provider on the website; https://bgp.he.net/AS4230#_prefixes
 
-A claro tem conexão direta com várias redes: https://bgp.he.net/AS4230#_peers
+**Claro** has direct connection with several networks: https://bgp.he.net/AS4230#_peers
 
-Para uma ASN conectar com outra ASN (ex: ASN do provedor se conectar com a ASN do google), é necessário que tenha uma conexão direta, com cabo, uma cabo de fibra ótica saindo daqui e conectando lá.
+For an **AS** to connect with another **AS** (e.g.: the provider's AS to connect with Google's AS), there must be a direct connection, with a cable. There are a fiber optic cables coming from here and connecting there.
 
 
-NAT
+## NAT (Network Address Translation)
 
-Network address translation
+Our router plays a very important role called **NAT**. We've talked how it works to send a request to Google, but how does Google know where it has to return the packet? Since our IP `192.168.0.63` is a **private network**, it is necessary to translate the internal IP of our network to a **public** **IP**. The internet provider provides a public IP address, usually one address per house.
+#### Why does NAT exist?
 
-Nosso roteador faz um papel mto importante chamado nat. 
-Vimos como funciona para mandarmos uma requisição para o google, mas como o google sabe para onde ele tem que devolver o pacote? Uma vez que nosso IP (192.168.0.63) é uma rede privada. Para isso, é necessário traduzir o IP interno da nossa rede para um IP público. O provedor de internet fornece um endereço de IP público, geralmente um endereço por casa.
+In the past, all devices, including internal network devices, had public addresses, meaning that anyone on the Internet could access your computer within your internal network. As a result, the number of IP addresses would not be sufficient, and the maximum number was reached.
 
-Porque existe o NAT?
-
-Antigamente todos os dispositivos, incluindo os dispositivos internos da rede, eram endereços públicos, ou seja, qualquer pessoa da internet conseguia chegar no seu computador dentro da sua rede interna.
-
-Com isso, a quantidade de endereços IPs não iria dar conta, esgotou a quantidade máxima.
-
-Por isso, a ideia foi atribuir um único endereço IP para cada rede (casa), e é usado o NAT para traduzir os endereços da rede privada para uma rede pública.
+Therefore, the idea was to assign a single IP address to each network (home), and NAT was used to translate the addresses from the private network to a public network.
