@@ -8,7 +8,7 @@ The `192.168.0.1` network can't communicate with `10.10.0.0`, how does that work
 
 Different networks can communicate with each other through a Router. The router has interfaces that make this possible. In most cases, the router is the network gateway. So the gateway is responsible for a network `192.168.0.0` being able to communicate with another `10.10.0.0`.
 
-"Computer A" wants to communicate with the Web Server `10.10.0.50`, but it has access to this network. Therefore, the gateway will be responsible for sending the packet to its network interface that has access to another network.
+"Computer A" wants to communicate with the Web Server `10.10.0.50`, but it does not have access to this network. Therefore, the gateway will be responsible for sending the packet to its network interface that has access to another network.
 
 <figure><img src="../.gitbook/assets/route-1.png" alt=""><figcaption><p>192.168.0.62 (Computer A) -> 192.168.0.1 (Router)<br>192.168.0.1 (Router) -> 10.10.01 (Router)<br>10.10.01 (Router) -> 10.10.0.50 (Web Server)</p></figcaption></figure>
 
