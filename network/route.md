@@ -12,12 +12,6 @@ Different networks can communicate with each other through a Router. The router 
 
 <figure><img src="../.gitbook/assets/route-1.png" alt=""><figcaption><p>192.168.0.62 (Computer A) -> 192.168.0.1 (Router)<br>192.168.0.1 (Router) -> 10.10.01 (Router)<br>10.10.01 (Router) -> 10.10.0.50 (Web Server)</p></figcaption></figure>
 
-We can see this entire communication process using the `traceroute` command. For example, we can see the communication with a Cloudflare server.
-
-```
-$ traceroute 1.1.1.1
-```
-
 In the middle of this communication, there is a firewall, which basically works to control a network, allowing, denying or blocking access.
 
 In this example below, we can “simulate” a rule in the firewall where "computer A" can access the database server because there is a rule in the firewall that allows this access.
@@ -44,7 +38,10 @@ The ISP will receive a notification from Google, so Google will notify the provi
 
 We call this communication between public networks **Autonomous Systems** (AS), because the communication is automatic, there is no one configuring **BGP**. However, this process is done through several routes, it is not directly from the provider to the Google network, we can trace the route with the command `traceroute`.
 
-With the `traceroute` command, we can see all the IPs of the communication, from our computer until it reaches the destination IP, the communication passes through all of them. We can also use the website https://ipinfo.io/ to consult more about each one.
+With the `traceroute` command, we can see all the IPs of the communication, from our computer until it reaches the destination IP, the communication passes through all of them. For example, we can see the communication with a Cloudflare server.
+
+
+We can also use the website https://ipinfo.io/ to consult more about each one.
 
 We can see all **Claro** networks, which is a provider on the website; https://bgp.he.net/AS4230#\_prefixes
 
