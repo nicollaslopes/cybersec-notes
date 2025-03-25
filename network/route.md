@@ -40,6 +40,7 @@ We call this communication between public networks **Autonomous Systems** (AS), 
 
 With the `traceroute` command, we can see all the IPs of the communication, from our computer until it reaches the destination IP, the communication passes through all of them. For example, we can see the communication with a Cloudflare server.
 
+<figure><img src="../.gitbook/assets/traceroute.png" alt=""><figcaption></figcaption></figure>
 
 We can also use the website https://ipinfo.io/ to consult more about each one.
 
