@@ -30,9 +30,15 @@ DNS records (also known as zone files) are instructions that reside on authorita
 #### What are the most common types of DNS records?
 
 **A** — This is the record that contains the IP address of a domain. 
+
 **AAAA** — This is a record that contains the IPv6 address for a domain (as opposed to A records, which list the IPv4 address). 
+
 **CNAME** — This points a domain or subdomain to another domain; it does NOT provide an IP address. 
+
 **MX** — This directs email to a mail server. 
+
 **TXT** — This allows an administrator to store text notes in the record. These records are often used for email security. 
+
 **NS** — This stores the nameserver for a DNS entry. 
+
 **SOA** — This stores administrator information about a domain.
