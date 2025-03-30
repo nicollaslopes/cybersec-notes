@@ -42,3 +42,26 @@ DNS records (also known as zone files) are instructions that reside on authorita
 **NS** — This stores the nameserver for a DNS entry. 
 
 **SOA** — This stores administrator information about a domain.
+
+
+## how does the resolution flow work using root servers?
+
+First, we ask the router who is responsible for `.br`, since it does not know this information. Then it will ask the root servers who is the server responsible for `.br`.
+
+dns1
+
+
+Now we know who is responsible for `.br`, another search is done to find out who is responsible for `com.br`, so now the flow is as follows:
+
+print dns2
+
+We can also specify who we want to ask.
+
+print
+
+We can see that he himself is responsible.
+
+Now, we asked him who is responsible for `crowsec.com.br` and that's how we found out.
+
+
+Now we ask `davina.ns.cloudflare.com.` what is the value of entry A of the domain `www.crowsec.com.br`.
