@@ -29,39 +29,44 @@ DNS records (also known as zone files) are instructions that reside on authorita
 
 ### What are the most common types of DNS records?
 
-**A** — This is the record that contains the IP address of a domain. 
+**A** — This is the record that contains the IP address of a domain.
 
-**AAAA** — This is a record that contains the IPv6 address for a domain (as opposed to A records, which list the IPv4 address). 
+**AAAA** — This is a record that contains the IPv6 address for a domain (as opposed to A records, which list the IPv4 address).
 
-**CNAME** — This points a domain or subdomain to another domain; it does NOT provide an IP address. 
+**CNAME** — This points a domain or subdomain to another domain; it does NOT provide an IP address.
 
-**MX** — This directs email to a mail server. 
+**MX** — This directs email to a mail server.
 
-**TXT** — This allows an administrator to store text notes in the record. These records are often used for email security. 
+**TXT** — This allows an administrator to store text notes in the record. These records are often used for email security.
 
-**NS** — This stores the nameserver for a DNS entry. 
+**NS** — This stores the nameserver for a DNS entry.
 
 **SOA** — This stores administrator information about a domain.
 
-
-## how does the resolution flow work using root servers?
+## How does the resolution flow work using root servers?
 
 First, we ask the router who is responsible for `.br`, since it does not know this information. Then it will ask the root servers who is the server responsible for `.br`.
 
-dns1
+<figure><img src="../.gitbook/assets/dns-1-2.png" alt="" width="563"><figcaption></figcaption></figure>
 
+<figure><img src="../.gitbook/assets/dns-1-1.png" alt=""><figcaption></figcaption></figure>
 
-Now we know who is responsible for `.br`, another search is done to find out who is responsible for `com.br`, so now the flow is as follows:
+Now we know who is responsible for `.br`, another search is done to find out who is responsible for `com.br`, we can also specify who we want to ask
 
-print dns2
+<figure><img src="../.gitbook/assets/dns-2-1.png" alt="" width="563"><figcaption></figcaption></figure>
 
-We can also specify who we want to ask.
+<figure><img src="../.gitbook/assets/dns-2.png" alt=""><figcaption></figcaption></figure>
 
-print
-
-We can see that he himself is responsible.
+&#x20;We can see that he himself is responsible.
 
 Now, we asked him who is responsible for `crowsec.com.br` and that's how we found out.
 
+<figure><img src="../.gitbook/assets/dns-3-2.png" alt="" width="563"><figcaption></figcaption></figure>
+
+<figure><img src="../.gitbook/assets/dns-3-1.png" alt=""><figcaption></figcaption></figure>
 
 Now we ask `davina.ns.cloudflare.com.` what is the value of entry A of the domain `www.crowsec.com.br`.
+
+<figure><img src="../.gitbook/assets/dns-4-2.png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../.gitbook/assets/dns-4-1.png" alt=""><figcaption></figcaption></figure>
