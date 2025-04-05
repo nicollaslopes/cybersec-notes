@@ -30,13 +30,13 @@ Listening on 0.0.0.0 4444
 
 If you want to transfer files, just use the following method. First we open the port on the machine that wants to receive the file, inserting the “>” indicating that whatever is sent to this connection will be saved in the defined file name.
 
-```bash
+```
 nc -nlvp 1337 > xpto.txt
 ```
 
 Now all you have to do is connect to this IP and enter the port and the file to be sent
 
-```bash
+```
 nc -v 192.168.0.10 1337 < xpto.txt
 ```
 
@@ -44,7 +44,7 @@ nc -v 192.168.0.10 1337 < xpto.txt
 
 If we want to simulate an open door on a machine to serve as a honeypot, we do the following.
 
-```bash
+```
 while true; do sudo nc -nlvp 21 1>> log.txt 2>> erro.txt; done;
 ```
 
