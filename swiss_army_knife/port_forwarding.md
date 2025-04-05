@@ -8,6 +8,8 @@ Let's suppose we need to open a port to get a `reverse shell`. Once we open a po
 
 Considering that we have managed to compromise a server that has a edge firewall. We want to open a port on that server to connect directly to it through our computer. Because of the firewall, we cannot connect directly because it does not allow and blocks access. Therefore, the solution is to make a reverse connection. We open a port on our computer and make the server connect to our machine, since the firewall has outgoing ports that it releases. For this to work, it is necessary to have port forwarding working.
 
+<figure><img src="../.gitbook/assets/port-forwarding.png" alt=""><figcaption></figcaption></figure>
+
 This will depend a lot on which provider we use, how many routers you have in the way (in which case we would have to have access to all the routers to apply the correct configuration). And even then, the provider may block it.
 
 Another solution is to use a VPS (Virtual Private Network). We can rent a server in the cloud, and with this we can open a port that will be exposed to the internet, so we don't need to configure the router.
