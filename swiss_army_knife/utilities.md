@@ -26,7 +26,7 @@ $ nc -nlvp 4444
 Listening on 0.0.0.0 4444
 ```
 
-#### File transfer
+### File transfer
 
 If you want to transfer files, just use the following method. First we open the port on the machine that wants to receive the file, inserting the “>” indicating that whatever is sent to this connection will be saved in the defined file name.
 
@@ -40,7 +40,7 @@ Now all you have to do is connect to this IP and enter the port and the file to 
 nc -v 192.168.0.10 1337 < xpto.txt
 ```
 
-#### Creating a honeypot
+### Creating a honeypot
 
 If we want to simulate an open door on a machine to serve as a honeypot, we do the following.
 
@@ -48,7 +48,7 @@ If we want to simulate an open door on a machine to serve as a honeypot, we do t
 while true; do sudo nc -nlvp 21 1>> log.txt 2>> erro.txt; done;
 ```
 
-#### Reverse Shell
+### Reverse Shell
 
 Netcat is also used when we want to get a reverse shell. We can open a port on our machine and on the target machine send the connection as follows.
 
