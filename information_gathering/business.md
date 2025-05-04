@@ -28,7 +28,7 @@ Google hacking is basically using the google search engine to collect sensitive 
 * **cache**: search in the cache
 * **" "** : exact search
 * **-** : (just a dash) Omit in the search 
-* 
+
 Type of files and extensions: 
 
 * php, asp, aspx, do, js, phps, txt, doc, docx, pdf, xls, xlsx, ppt, ovpn, sql, bak, old...
@@ -38,7 +38,7 @@ Titles
 
 Keywords
 * "config", "password", "passwords", "users", "access", "ftp", "bkp", "backup", "data"...  
-* 
+
 Examples:
 * site:businesscorp.com.br -www ext:php
 * site:businesscorp.com.br intitle:"Admin"
