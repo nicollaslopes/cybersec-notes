@@ -13,5 +13,4 @@ Some sites we can look for important information are:
 
 Another very essential tool is Web Archive. This site basically maps the cache of a domain's pages since its existence. We can use it to search for files that existed a while ago and gather important information.
 
-https://web.archive.org/
-
+{% embed url="https://web.archive.org" %}
