@@ -20,7 +20,6 @@ Por conta de alguns problemas de padronizações de resposta no protocolo whois,
 
 {% embed url="https://client.rdap.org" %}
 
-
 ## Pesquisa por IP
 
 Para começarmos a mapear a infra pelos ips, podemos utilizar dois sites que facilita esse processo e exibe o bloco de ip.
@@ -46,12 +45,9 @@ Agora podemos utilizar o whois no endereço ip exibido que irá ser trago as inf
 
 ## Pesquisa por BGP
 
-
 {% embed url="https://bgpview.io" %}
 
 {% embed url="https://bgp.he.net" %}
-
-
 
 ## Shodan
 
