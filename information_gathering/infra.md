@@ -44,3 +44,44 @@ post01.itau.com.br has address 200.196.152.9
 
 Agora podemos utilizar o whois no endereço ip exibido que irá ser trago as informações do Itaú.
 
+## Pesquisa por BGP
+
+
+{% embed url="https://bgpview.io" %}
+
+{% embed url="https://bgp.he.net" %}
+
+
+
+## Shodan
+
+{% embed url="https://www.shodan.io" %}
+
+Shodan é um mecanismo de busca para encontrar dispositivos online. Alguns operadores que podemos utilizar na busca são:
+
+* hostname:
+* os:
+* port:
+* ip:
+* net:
+* country:
+* city:
+* geo:
+* org:
+* " "
+
+Examples: 
+
+* hostname:businesscorp.com.br
+* ip:36.59.174.225
+* net:36.59.174.225/28
+* webcam country:br
+* port 3306 os:Windows country:br
+* port 445 country:br contabilidade
+* hostname:google.com
+
+## Censys
+
+O Censys também é uma outra plataforma para coleta de informações de forma passiva.
+
+{% embed url="https://search.censys.io" %}
