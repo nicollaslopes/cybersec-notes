@@ -221,7 +221,7 @@ dev.businesscorp.com.br is an alias for devbusinesscorp.s3-sa-east 1.amazonaws.c
 $ dnsenum --enum businesscorp.com.br
 ```
 
-#### Serviços para pesquisa passiva
+### Serviços para pesquisa passiva
 Existem também alguns serviços que podemos coletar informações do alvo de uma forma passiva, sem gerar log no servidor que estamos testando. Alguns deles são:
 
 {% embed url="https://www.virustotal.com/gui/home/search" %}
@@ -230,7 +230,7 @@ Existem também alguns serviços que podemos coletar informações do alvo de um
 
 {% embed url="https://securitytrails.com/" %}
 
-#### Coleta através de certificados digitais
+### Coleta através de certificados digitais
 Quando um site utiliza o certificado SSL, para adicionar mais uma camada de segurança, foi criado um projeto para manter um log de todas as emissões de certificados que acontecem. Com isso, podemos descobrir subdomínios que emitiram certificados uma vez que é armazenado esse log e ele é público.
 
 {% embed url="https://crt.sh/" %}
