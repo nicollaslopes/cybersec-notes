@@ -48,6 +48,20 @@ wfuzz
 
 https://github.com/projectdiscovery/httpx/releases
 
+### Aquatone
+
+https://github.com/michenriksen/aquatone
+
+```
+$ subfinder -d testphp.vulnweb.com -silent | aquatone
+aquatone v1.7.0 started at 2025-05-14T07:52:00-04:00
+
+Targets    : 2
+Threads    : 3
+Ports      : 80, 443, 8000, 8080, 8443
+Output dir : .
+```
+
 ### Parameter Discovery
 
 ### Param Spider
