@@ -2,7 +2,7 @@
 
 ## URL Discovery
 
-Para fazermos uma busca por u
+Para fazermos uma busca por arquivos e diretórios, podemos utilizar algumas ferramentas para fazer o `fuzzing`.
 
 ### Gau
 
@@ -40,8 +40,18 @@ http://businesscorp.com.br/configuracoes/comunicacao/
 
 ```
 
-ffuf
-wfuzz
+### ffuf
+
+https://github.com/ffuf/ffuf
+
+image ffuf
+### wfuzz
+
+https://github.com/xmendez/wfuzz
+
+```
+$ wfuzz -t 100 -c -z file,wordlist.txt --hc 404 http://testphp.vulnweb.com/FUZZ
+```
 
 ### Content Discovery
 ### httpx
