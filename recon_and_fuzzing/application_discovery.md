@@ -3,12 +3,11 @@
 ## URL Discovery
 
 Para fazermos uma busca por arquivos e diretórios, podemos utilizar algumas ferramentas para fazer o `fuzzing`.
-
 ### Gau
 
 O gau utiliza motores de pesquisa (ex: google, shodan, censys, waybackmachine), compila essas informações e nos retorna as urls que foi descobertas nessas buscas.
 
-https://github.com/lc/gau/releases
+{% embed url="https://github.com/lc/gau/releases" %}
 
 ```
 $ echo "businesscorp.com.br" | gau 
@@ -37,7 +36,6 @@ http://businesscorp.com.br/config
 http://businesscorp.com.br/config.txt
 http://businesscorp.com.br/configuracoes/
 http://businesscorp.com.br/configuracoes/comunicacao/
-
 ```
 
 ### ffuf
@@ -98,7 +96,6 @@ $ sudo docker run -it 5aea64de6803 -d testphp.vulnweb.com
 [INFO] Found 860 URLs after cleaning
 [INFO] Extracting URLs with parameters
 [INFO] Saved cleaned URLs to results/testphp.vulnweb.com.txt
-
 ```
 
 O resultado:
