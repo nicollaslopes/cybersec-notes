@@ -44,7 +44,8 @@ http://businesscorp.com.br/configuracoes/comunicacao/
 
 https://github.com/ffuf/ffuf
 
-image ffuf
+<div align="right" data-full-width="false"><figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure></div>
+
 ### wfuzz
 
 https://github.com/xmendez/wfuzz
@@ -54,6 +55,7 @@ $ wfuzz -t 100 -c -z file,wordlist.txt --hc 404 http://testphp.vulnweb.com/FUZZ
 ```
 
 ### Content Discovery
+
 ### httpx
 
 https://github.com/projectdiscovery/httpx/releases
@@ -167,7 +169,7 @@ ns2.businesscorp.com.br
 parsingok.businesscorp.com.br
 ```
 
-Depois usamos o httpx para fazer uma conexão em cada subdóminios e verificar se está ativo ou não. 
+Depois usamos o httpx para fazer uma conexão em cada subdóminios e verificar se está ativo ou não.\
 Podemos usar o parâmetro -path para testar diretórios que quisermos, exemplo: `-path /admin/`
 
 ```
@@ -230,4 +232,3 @@ http://mail.businesscorp.com.br/squirrelmail/src/webmail.php?right_frame=right_m
 http://parsingok.businesscorp.com.br:80/
 http://parsingok.businesscorp.com.br:80/css/default.css
 ```
-
