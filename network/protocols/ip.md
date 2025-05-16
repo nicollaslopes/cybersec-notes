@@ -6,11 +6,11 @@ If we want reliability and greater control, we can associate the IP protocol wit
 
 Let's take a look at the structure of the IP protocol header.
 
-<figure><img src="../.gitbook/assets/ip-1.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/ip-1.png" alt=""><figcaption></figcaption></figure>
 
 Let's see this using Wireshark.
 
-<figure><img src="../.gitbook/assets/ip-2.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/ip-2.png" alt=""><figcaption></figcaption></figure>
 
 As we can see above, we have the ethernet frame with origin from the client host and destination from the server host. (we know this by looking at the Mac Address as seen previously).
 
