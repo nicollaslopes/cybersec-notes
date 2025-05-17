@@ -14,9 +14,9 @@ O gau utiliza motores de pesquisa (ex: google, shodan, censys, waybackmachine), 
 
 ### ffuf
 
-https://github.com/ffuf/ffuf
-
 <div align="right" data-full-width="false"><figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure></div>
+
+{% embed url="https://github.com/ffuf/ffuf" %}
 
 ### wfuzz
 
