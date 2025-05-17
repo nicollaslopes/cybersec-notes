@@ -24,7 +24,7 @@ https://github.com/ffuf/ffuf
 
 {% embed url="https://github.com/xmendez/wfuzz" %}
 
-### Content Discovery
+## Content Discovery
 
 ### httpx
 
@@ -38,7 +38,7 @@ https://github.com/ffuf/ffuf
 
 {% embed url="https://github.com/michenriksen/aquatone" %}
 
-### Parameter Discovery
+## Parameter Discovery
 
 ### Param Spider
 
