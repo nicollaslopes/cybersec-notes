@@ -68,3 +68,94 @@ Com isso percebemos a diferença, o syn scan para realizar scan é mais silencio
 
 ## Analisando o consumo de um Scan
 
+Ao realizarmos um scan, temos que ficar atento a quantidade que ele irá consumir de uma rede, é ideal que o quanto menos for, melhor. Para isso, podemos utilizar o iptables para analisar a quantidade de pacotes que será enviado/recebido em um scan.
+
+Temos que configurar para visualizar os pacotes que entram e sai da própria máquina. Aplicando a regra para aceitar a entrada e saída e logo após isso exibindo as informações.
+
+```
+$ iptables -A INPUT -s 192.168.2.134 -j ACCEPT
+$ iptables -A OUTPUT -d 192.168.2.134 -j ACCEPT
+```
+
+```
+$ iptables -nvL              
+Chain INPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source              destination
+    0     0 ACCEPT     all  --  *      *       192.168.2.134       0.0.0.0/0 
+
+Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source              destination
+
+Chain OUTPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source              destination 
+    0     0 ACCEPT     all  --  *      *       0.0.0.0/0           192.168.2.134
+```
+
+Com isso, podemos fazer o scan para realizar o teste. Vamos começar com o TCP connect.
+
+```
+$ sudo nmap -sT -p 80 -Pn 192.168.2.134
+```
+
+```
+$ iptables -nvL                                
+Chain INPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source              destination         
+    4   224 ACCEPT     all  --  *      *       192.168.2.134       0.0.0.0/0    
+
+Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source              destination     
+Chain OUTPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source              destination
+    4   224 ACCEPT     all  --  *      *       0.0.0.0/0           192.168.2.134
+```
+
+Foram enviados 4 pacotes, com tamanho de 224 bytes.
+
+Para continuar os testes, precisamos zerar as configurações porque ele irá somar as quantidades anteriores. Utilizamos **iptables -Z** para zerar.
+
+Agora, vamos utilizar o Syn Scan, ou Half Open.
+
+```
+$ sudo nmap -sS -p 80 -Pn 192.168.2.134
+```
+
+```
+$ iptables -nvL
+Chain INPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source              destination
+    3   128 ACCEPT     all  --  *      *       192.168.2.134       0.0.0.0/0 
+
+Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source              destination
+
+Chain OUTPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source              destination
+    3   128 ACCEPT     all  --  *      *       0.0.0.0/0           192.168.2.134
+```
+
+Foram enviados 3 pacotes, com mesmo tamanho de 128 bytes.
+
+Podemos perceber que dependendo não é vantajoso utilizar o TCP scan daquela primeira forma. O mais ideal seria criar um personalizado com determinadas portas ou definir um número determinado usando o parâmetro `--top-ports 250`. Assim haverá bem menos tráfego e será enviado uma quantidade muito menor de bytes.
+
+```
+$ nmap -sS -p 21,25,80,443,8080,3306 -Pn <ip>
+```
+
+
+*Obs: Quando formos fazer um scan em um host, temos que ficar atento para fazer um scan completo, visto que uma porta pode ter seu número alterado e por padrão, o nmap só varre as 1000 principais. Com isso, se não especificarmos com o parâmetro `-p-` ou `-p 1-65535`, ele não irá achar uma porta específica. Ex: alterando a porta do SSH para 22999, com o scan padrão ele não irá encontrar.*
+
+Também é interessante fazer uma varredura por UDP, porque pode haver alguns recursos que estão rodando por UDP.
+
+```
+PORTA ABERTA                               SEM REPOSTA
+PORTA FECHADA                              PORT UNREACHABLE
+PORTA COM FILTRO DE FIREWALL EM DROP       SEM RESPOSTA
+PORTA COM FILTRO DE FIREWALL EM REJECT     PORT UNREACHABLE
+```
+
+Mas há uma ambiguidade no UDP, porque como vemos acima, quando enviamos um pacote para a porta UDP e ela estiver aberta, vai ter o mesmo comportamento quando ela está configurada em DROP no firewall. Caso ela esteja fechada, terá o mesmo comportamento se estiver configurada em REJECT no firewall. Como podemos ter certeza então se está aberta ou não? Podemos então, ao scanear com o nmap, passar o parâmetro -V para interagir e enumerar os serviços, rodando os scripts NSE que ele possui.
+
+```
+$ nmap -v -sUV -p 161 <ip>
+```
