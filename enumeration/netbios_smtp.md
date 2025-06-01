@@ -156,3 +156,32 @@ Se quisermos excluir a conexão de determinada máquina usamos o comando a segui
 ```
 net use \\<ip> /delete
 ```
+
+# Automatizando a enumeração NetBIOS/SMB
+
+## Enum4linux
+
+O enum4linux é uma ferramenta que automatiza o processo de enumeração de NetBIOS/SMB que fizemos manualmente de uma forma mais organizada.
+
+O parâmetro -U serve para trazer informações de usuários.
+
+O parâmetro -S serve para trazer informações sobre compartilhamento.
+
+O parâmetro -a significa all, ele vai tentar achar o máximo de informações sobre o host e retornar.
+
+
+Podemos utilizar da seguinte forma.
+
+```
+$ enum4linux -a <ip>
+```
+
+## Scripts para enumeração NetBIOS/SMB
+
+O nmap também trás alguns recursos que permite facilitar a enumeração. A pasta dos arquivos referente ao protocolo NetBIOS/SMB fica em **/usr/share/nmap/scripts/**
+
+Nessa pasta possui alguns scripts que já exploram falhas de segurança conhecidas. Utilizamos o comando a seguir. (o * é um coringa, onde irá pesquisar todos os arquivos que tiver com a string restante passada)
+
+```
+$ nmap -v --script=smb-vuln-ms* <ip>
+```
