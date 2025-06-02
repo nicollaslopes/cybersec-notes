@@ -1,6 +1,6 @@
 # FTP
 
-Para interagirmos com o serviço de FTP, podemos utilizar o netcat para fazer a conexão ou também o utilitário do ftp (não precisa passar a porta se for a porta padrão 21).
+To interact with FTP service, we can use netcat to connect or also use the FTP utility (we don't need to pass the port if it is the default port 21).
 
 ```
 $ nc -vn <host> 21
@@ -10,10 +10,10 @@ $ nc -vn <host> 21
 $ ftp <host>
 ```
 
-Com isso ele irá te pedir o nome do usuário e senha.
+It will then ask you for your username and password.
 
-Um processo de enumeração é tentar logar com o usuário `anonymous` ou `ftp`. Alguns administradores configuram para aceitar logar com esse usuário, que possui privilégios baixos, não é uma boa prática utilizar isso. Então, é interessante tentar entrar com usuário e senha `anonymous` ou também `ftp` e verificar se é possível.
+We can enumerate trying to log in with `anonymous` or `ftp` users. Some administrators configure it to accept to loggin with these users, which have low privileges, it's not a good practice to use it. If these users are allowed, we can try to log in using `anonymous` or `ftp` as the password.
 
-Se caso conseguirmos conectar com sucesso e executarmos algum comando, por exemplo "ls", ele não irá responder, porque há um firewall barrando no meio do caminho, a configuração padrão do FTP funciona de forma ativa, então precisamos antes entrar no modo passivo para interagir com o serviço.
+If we manage to connect successfully and execute a command, for example "ls", it will not respond, because there is a firewall blocking, the default FTP configuration works actively, so we first need to enter passive mode to interact with this service. 
 
-Podemos utilizar **help** para verificar as opções. Para entrar no modo passivo basta utilizar `passive` ou `pasv`. Agora pode-se executar os comandos sem problemas!
+We can use `help` command to check the options. To enter passive mode, we can use `passive` or `pasv` command. Now we can execute the commands without any problems.
