@@ -55,3 +55,29 @@ xisde
 Com isso, conseguimos passar um valor para codificar e se passarmos o resultado da codificação, é possível fazer o processo reverso, sendo assim `two way`.
 
 Podemos também codificar arquivos com bas64 e depois reverter, fazendo virar um arquivo novamente.
+
+```
+$ cat test.png | base64 > encodedFile
+
+$ head -n 5 encodedFile
+
+iVBORw0KGgoAAAANSUhEUgAADwAAAAQ4CAIAAAA7d75QAAAAA3NCSVQICAjb4U/gAAAgAElEQVR4
+nOzdeVwTd/o48Gdyh5AACYRL7nB4IKAcnohYq3grnrXtttLa2sOe/pRtu2W33W3t8d22aw9b3aqt
+tepWq2Ct9QI8EbkEBeVQ7puEhDAJOeb3RyAGkiAoiNLn/Xr5eiWTyWeemXzyzMfhyWeIHWrvxLin
+pMxvwr03MEQT95Kpub7HljPKv+YkbfwBJle/WRWzwVExfS9btSOy/m+w4eO2pMSj9lL/l8alrnOM
+f3kvtfTsWP81siMJnOuFM3acnv7NT4988kVy+tYVr59ZP/Lpn6ljig8ufACBdiNXtxY+lxXAvQxb
+```
+
+```
+$ cat encodedFile | base64 -d > encodedFile.png
+
+$ head -n 5 encodedFile.png
+
+�PNG
+�
+IHDR;w�Ps��O� IDATx���y\w�8�gr�� �K�px ���X�x+�������Þ��m�e��m�...
+```
+
+
+
+
