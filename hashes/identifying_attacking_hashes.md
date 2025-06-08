@@ -51,6 +51,6 @@ $ hashcat -m <hash-mode> <hash-file> <wordlist> --force
 
 Sites:
 
-https://hashes.com/en/decrypt/hash
+{% embed url="https://hashes.com/en/decrypt/hash" %}
 
 
