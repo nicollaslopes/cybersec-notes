@@ -2,6 +2,8 @@
 
 O netcat não suporta o SSL para fazer a conexão, com isso podemos utilizar o **openssl**. Temos que informar o método que queremos e o host. Um detalhe, é que nesse caso é importante utilizar o HTTP/1.1 para identificarmos Web Application Firewall ou Proxys, que serão serviços que estão no meio do caminho. O host também é necessário informar, para que o servidor possa nos responder corretamente.
 
+Netcat does not support SSL to establish the connection, so we can utilize `openssl`. We have to inform the method and the host. In this case it's important to use HTTP/1.1 to identify the Web Application Firewall or Proxys, which are services 
+
 ```
 $ openssl s_client -quiet -connect www.tibiabr.com:443
 depth=2 C = US, O = Google Trust Services LLC, CN = GTS Root R4
