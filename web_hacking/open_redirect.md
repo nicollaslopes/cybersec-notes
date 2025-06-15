@@ -5,7 +5,7 @@ O open redirect, é uma vulnerabilidade que ocorre quando a aplicação web poss
 Example of vulnerable code in php:
 
 ```html
-<a id="redirectLink" href="UrlController.php?url=http://example.com/">Click here to go to the website</a>
+<a id="redirectLink" href="redirect.php?url=http://example.com/">Click here to go to the website</a>
 ```
 
 ```php
@@ -16,6 +16,6 @@ header("Location: $url");
 Nós podemos então trocar o parâmetro `url` para a aplicação nos redirecionar para outro site
 
 ```
-http://localhost:8000/UrlController.php?url=http://malicious-site.com
+http://localhost:8000/redirect.php?url=http://malicious-site.com
 ```
 
