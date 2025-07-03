@@ -23,3 +23,4 @@ Com isso, no banco de dados vai retornar o primeiro usuário que a consulta busc
 SELECT * FROM users WHERE user = '' or 1=1 -- ' AND pass 'password123" 
 ```
 
+## SQL Injection Error Based
