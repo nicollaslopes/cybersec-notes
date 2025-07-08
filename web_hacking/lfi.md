@@ -6,7 +6,7 @@ Essa vulnerabilidade ocorre quando a aplicação permite que o usuário inclua a
 include($_GET['file']);
 ```
 
-# De LFI a RCE - Infecção de Logs
+## De LFI a RCE - Infecção de Logs
 
 Uma vez que conseguimos visualizar arquivos do lado do servidor, podemos aproveitar disso para conseguir uma RCE através da leitura dos arquivos de logs infectando o mesmo com algum código malicioso.
 
