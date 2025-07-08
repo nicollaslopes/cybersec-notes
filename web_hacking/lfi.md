@@ -34,3 +34,25 @@ PHP Wrappers allows users to interact with various i/o streams including file io
 - [rar://](https://www.php.net/manual/en/wrappers.rar.php) — RAR
 - [ogg://](https://www.php.net/manual/en/wrappers.audio.php) — Audio streams
 - [expect://](https://www.php.net/manual/en/wrappers.expect.php) — Process Interaction Streams
+
+Em aplicações mais antigas onde é adicionado uma extensão no final do arquivo, podemos fazer o bypass adicionando o null byte `%00` para burlarmos essa extensão e visualizar o arquivo. Porém em aplicações mais modernas isso não é possível, nesse caso podemos em aplicações PHP utilizar o PHP Wrapper para lidarmos com essa situação. 
+
+Vamos pegar esse exemplo dessa aplicação que adiciona a extensão `.php` no final do arquivo que é passado pelo parâmetro `page`. Se passarmos o parâmetro `test`, irá ficar dessa forma:
+
+Agora, utilizando o PHP Wrapper `data://`, conseguimos burlar isso:
+
+
+Podemos também encodar em base64:
+
+```
+$ echo -n "test" | base64 
+dGVzdA==
+```
+
+Com isso, nós conseguimos também executar comandos do sistema operacional:
+
+
+```
+$ echo -n "<?php system('id'); ?>" | base64
+PD9waHAgc3lzdGVtKCdpZCcpOyA/Pg==
+```
