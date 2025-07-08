@@ -18,7 +18,7 @@ http://vuln.app/<?php system($_GET['shell']); ?>
 
 Com isso, ao lermos o arquivo de log, podemos ver o código que inserimos. Como estamos através do LFI, e essa página interpreta o PHP, ele encontra o nosso código em PHP no log e tenta executar o comando que enviamos.
 
-# PHP Wrappers
+## PHP Wrappers
 
 PHP Wrappers allows users to interact with various i/o streams including file io. It can be used to get content of a file preventing the server from executing it.
 
