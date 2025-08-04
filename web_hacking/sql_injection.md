@@ -23,4 +23,49 @@ Com isso, no banco de dados vai retornar o primeiro usuário que a consulta busc
 SELECT * FROM users WHERE user = '' or 1=1 -- ' AND pass 'password123" 
 ```
 
-## SQL Injection Error Based
+## Error-based SQL Injection
+
+Esse é um tipo de injeção que retorna um erro para o usuário. Para triggar este erro, podemos passar, por exemplo, uma aspas simples para ver o que a aplicação retorna (essa aspas simples irá fechar a consulta no parâmetro que for passado). Se for vulnerável, geralmente provavelmente irá retornar uma mensagem de erro do tipo `Search SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax;`.
+
+Com isso, podemos utilizar o `union` do SQL para unir uma nova consulta, e passar um %23 que significa o caractere # encodado, já que estamos enviando essas informações pela url (irá comentar o resto da query que estiver no banco). Além do **"**#", poderia ser passado também um ponto e vírgula ou uma aspas simples, depende de como a aplicação foi feita. 
+
+```
+' or 1=1 union select 1; #
+```
+
+Assim, conseguimos descobrir a quantidade de colunas que possui, podemos tentar ir aumentando até não retornar nenhum erro. 
+
+Nesse caso, podemos descobrir que a quantidade de colunas na tabela de produtos são no total 6. Podemos perceber também que é refletido os valores que inserimos sendo criado uma nova visualização na consulta.
+
+A consulta final ficará assim, sendo completamente correta e com isso retorna as informações.
+
+```sql
+SELECT * FROM products WHERE name like '%' or 1=1 union select 1, 2, 3, 4, 5, 6; #%'
+```
+
+img3
+
+Agora que conseguimos descobrir corretamente a quantidade de colunas e fazer a consulta funcionar como queríamos, podemos tirar vantagem disso para buscar informações do banco de dados, podemos usar funções do MySQL (banco de dados utilizado) como `user()`, `database()`, `version()` entre outras.
+
+img4
+
+Podemos agora buscar na tabela `information_schema` pela tabela que descobrirmos anteriormente.
+
+```sql
+' union select 1, table_name, 3, 4, 5, 6 from information_schema.tables WHERE TABLE_SCHEMA="lab"; #
+```
+
+img5
+
+Uma vez que descobrimos o nome das tabelas, podemos ver que existe a tabela `users`. Com isso, nós conseguimos descobrir as colunas:
+
+```sql
+' union select 1, column_name, 3, 4, 5, 6 from information_schema.columns where TABLE_SCHEMA="lab" and TABLE_NAME="users"; #
+```
+
+img6
+
+Agora que já sabemos quais os nome das colunas, podemos fazer a busca diretamente na tabela de `users`.
+
+img7
+
