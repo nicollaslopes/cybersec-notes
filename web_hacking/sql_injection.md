@@ -75,3 +75,29 @@ Agora que já sabemos quais os nome das colunas, podemos fazer a busca diretamen
 
 Pronto! Dessa forma que conseguimos explorar o Error-based SQL Injection.
 
+### MySQL Error-Based SQL Injection Via ExtractValue Function
+
+This is a specific attack technique that uses MySQL’s `extractvalue` function to access sensitive data from the database. ExtractValue is a MySQL function commonly used to extract data from XML documents. It takes two arguments: an XML document and an XPath expression. The function returns the value specified by the XPath query within the XML document.
+
+Attackers can exploit this vulnerability by crafting malicious XPath expressions that, when processed by the `extractvalue` function, trigger an error and leak information about the database. Let's take a look how we can extract the database name:
+
+```
+extractvalue("something",concat(0x0a, database())); #
+```
+
+This payload injects the `database()` system variable into the XPath expression, causing MySQL to generate an error that reveals the database name.
+
+img 8
+
+We can also extract the table name from `information_schema`:
+
+```
+' and extractvalue("something",concat(0x0a, (select table_name from information_schema.tables WHERE TABLE_SCHEMA='lab' limit 0,1))); #
+```
+
+img 9
+
+We can take a look at the database to see what the query it will look like:
+
+img 10
+
