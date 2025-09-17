@@ -9,14 +9,26 @@ In an SSRF attack against the server, the attacker causes the application to mak
 For example, imagine a shopping application that lets the user view whether an item is in stock in a particular store. To provide the stock information, the application must query various back-end REST APIs. It does this by passing the URL to the relevant back-end API endpoint via a front-end HTTP request. When a user views the stock status for an item, their browser makes the following request:
 
 ```
-POST /product/stock HTTP/1.0 Content-Type: application/x-www-form-urlencoded Content-Length: 118 stockApi=http://stock.weliketoshop.net:8080/product/stock/check%3FproductId%3D6%26storeId%3D1
+POST /product/stock HTTP/1.0 
+
+Content-Type: application/x-www-form-urlencoded 
+
+Content-Length: 118 
+
+stockApi=http://stock.weliketoshop.net:8080/product/stock/check%3FproductId%3D6%26storeId%3D1
 ```
 
 This causes the server to make a request to the specified URL, retrieve the stock status, and return this to the user.
 
 In this example, an attacker can modify the request to specify a URL local to the server:
 ```
-POST /product/stock HTTP/1.0 Content-Type: application/x-www-form-urlencoded Content-Length: 118 stockApi=http://localhost/admin
+POST /product/stock HTTP/1.0 
+
+Content-Type: application/x-www-form-urlencoded 
+
+Content-Length: 118 
+
+stockApi=http://localhost/admin
 ```
 
 The server fetches the contents of the `/admin` URL and returns it to the user.
