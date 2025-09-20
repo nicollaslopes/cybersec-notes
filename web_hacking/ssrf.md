@@ -71,3 +71,5 @@ Agora, vamos utilizar uma ferramenta chamada `Gopherus`, que serve para gerar pa
 Com isso, podemos gerar um payload usando o `gopherus` para interagir com o MySQL localmente no servidor, algo que não teríamos acesso por estar acessível apenas a mesma rede.
 
 <figure><img src="../.gitbook/assets/ssrf-4.png" alt=""><figcaption></figcaption></figure>
+
+Obs: Em alguns casos, é necessário fazer o double url enconding, porque a aplicação já vai decodar o payload gerado pelo gopher, e para funcionar, é necessário que .. exitem null bytes
