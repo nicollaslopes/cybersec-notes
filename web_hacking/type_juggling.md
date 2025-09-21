@@ -4,11 +4,11 @@ Type juggling vulnerability in PHP applications occurs when a loose comparison o
 
 PHP Comparisons: Loose
 
-img1
+<figure><img src="../.gitbook/assets/type_juggling-1.jpg" alt=""><figcaption></figcaption></figure>
 
 PHP Comparisons: Strict
 
-img2
+<figure><img src="../.gitbook/assets/type_juggling-2.jpg" alt=""><figcaption></figcaption></figure>
 
 ## Scenarios of Exploitation
 
@@ -20,6 +20,4 @@ PHP would compare two strings if the program received the POST parameter from th
 var_dump("password" == "0");  // false
 ```
 
-However, if the program accepts the input through functions like **json_decode()** or **unserialize()**, type juggling issues can be exploited. The end-user would be able to specify the kind of input that is passed in in this way.
-
-
+However, if the program accepts the input through functions like **json\_decode()** or **unserialize()**, type juggling issues can be exploited. The end-user would be able to specify the kind of input that is passed in in this way.
