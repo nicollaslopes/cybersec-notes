@@ -20,7 +20,7 @@ PHP would compare two strings if the program received the POST parameter from th
 var_dump("password" == "0");  // false
 ```
 
-O problema é que nas versão do PHP < 7.4, ao comparar uma string com um int 0 por exemplo, retorna true.
+The problem is that in PHP versions < 7.4, when comparing a string with an int 0 for example, it returns true.
 
 ```php
 var_dump("password" == 0);  // true
