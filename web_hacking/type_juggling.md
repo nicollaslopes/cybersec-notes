@@ -20,4 +20,49 @@ PHP would compare two strings if the program received the POST parameter from th
 var_dump("password" == "0");  // false
 ```
 
-However, if the program accepts the input through functions like **json\_decode()** or **unserialize()**, type juggling issues can be exploited. The end-user would be able to specify the kind of input that is passed in in this way.
+O problema é que nas versão do PHP < 7.4, ao comparar uma string com um int 0 por exemplo, retorna true.
+
+```php
+var_dump("password" == 0);  // true
+```
+
+If the application accepts the input through functions like **json_decode()** or **unserialize()**, type juggling issues can be exploited. The end-user would be able to specify the kind of input that is passed in in this way.
+
+Let's take a look at the following example, we send a string `api123` to check if the key is correct, and obviously it is not.
+
+img3
+
+However, when we edit and put an int 0, we can notice that the application responds as true and thus we can bypass the comparison.
+
+img4
+
+As mentioned earlier, in PHP < 7.4, `0` is equal as `a2kml49nm2nvo4jy` which is the API key. We can take a look in the following code.
+
+```php
+<?php
+header("Content-Type: application/json");
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    $raw = file_get_contents('php://input');
+
+    $data = json_decode($raw, true);
+
+    $api_key = $data["api_key"];
+
+    if ($api_key == "a2kml49nm2nvo4jy"){
+        echo json_encode([
+            "valid" => true,
+            "message" => "✅ API Key is valid!"
+        ]);
+    } else {
+        echo json_encode([
+            "valid" => false,
+            "message" => "❌ Invalid API Key."
+        ]);
+    }
+    exit;
+}
+```
+
+In this scenario, it is really important to use `===` comparison operator to check the type.
