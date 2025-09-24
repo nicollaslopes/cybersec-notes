@@ -1,4 +1,4 @@
-# Server Side Template Injection
+# SSTI (Server Side Template Injection)
 
 Server-side template injection (SSTI) happens when an attacker can insert malicious code using the template engine’s native syntax, which then gets executed on the server.
 
