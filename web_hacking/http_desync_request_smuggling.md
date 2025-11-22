@@ -122,9 +122,9 @@ Then we we follow that up with the second request when that arrives at the front
 
 <figure><img src="../.gitbook/assets/9.png" alt=""><figcaption></figcaption></figure>
 
-For the user to receive a 404 status, we need to do a few things:&#x20;
+For the user to receive a 404 status, we need to do a few things:
 
-* &#x20;Change the HTTP version to 1.1
+* Change the HTTP version to 1.1
 * Uncheck the option "Update Content-Length"
 * Change request method to POST
 
@@ -136,14 +136,14 @@ So we have:
 
 <figure><img src="../.gitbook/assets/lab-2-3.png" alt=""><figcaption></figcaption></figure>
 
-O frontend esta usando o transfer encoding chunked, entao ele ira enviar o body inteiro, que tem nosso smuggle request para uma pagina que nao existe, por isso que enviamos o terminate chunk  `0\r\n\r\n` at the end that ensures that the entire request body is forwarded onwards. 
+<figure><img src="../.gitbook/assets/lab-2-4.png" alt=""><figcaption></figcaption></figure>
 
-Now we notice that there's the first chunk size `5e` (*since we are sending 94 characters and it needs to be hexadecimal `0x5e` means `94`*) followed by `\r\n`, ​​that includes everything from `POST` up to an including `x=1`.
+The front-end is using chunked transfer encoding, so it will send the entire body, which contains our smuggle request, to a page that doesn't exist. That's why we send the terminate chunk `0\r\n\r\n` at the end, ensuring that the entire request body is forwarded onward.
 
-The back-end server is using Content-Length and we've set as a `4`, it thinks that the request has ended after the first chunk size `5e\r\n` (which is 4 bytes).  
+Now we notice that there's the first chunk size `5e` (_since we are sending 94 characters and it needs to be hexadecimal `0x5e` means `94`_) followed by `\r\n`, ​​that includes everything from `POST` up to an including `x=1`.
+
+The back-end server is using Content-Length and we've set as a `4`, it thinks that the request has ended after the first chunk size `5e\r\n` (which is 4 bytes).
 
 Then it's poisoned by that prefix (in orange). We've set a Content-Length of `11` in the smuggle request because the content size in the request body is `10`, including everything from `x=1` up to the last `\r\n`. When the back-end server receives a new request that has been poisoned, it will wait for 1 byte of content (we can define more than 1 byte) and therefore everything that comes after the "G" in the "GET" method will be ignored or discarded, depending on the implementation.
 
-
-
-<figure><img src="../.gitbook/assets/lab-2-4.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/10.png" alt=""><figcaption></figcaption></figure>
