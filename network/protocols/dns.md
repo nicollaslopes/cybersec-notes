@@ -49,7 +49,7 @@ First, we ask the router who is responsible for `.br`, since it does not know th
 
 <figure><img src="../../.gitbook/assets/dns-1-2.png" alt="" width="563"><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/dns-1-1.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="broken-reference" alt=""><figcaption></figcaption></figure>
 
 Now we know who is responsible for `.br`, another search is done to find out who is responsible for `com.br`, we can also specify who we want to ask
 
@@ -57,16 +57,16 @@ Now we know who is responsible for `.br`, another search is done to find out who
 
 <figure><img src="../../.gitbook/assets/dns-2.png" alt=""><figcaption></figcaption></figure>
 
-&#x20;We can see that he himself is responsible.
+We can see that he himself is responsible.
 
 Now, we asked him who is responsible for `crowsec.com.br` and that's how we found out.
 
 <figure><img src="../../.gitbook/assets/dns-3-2.png" alt="" width="563"><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/dns-3-1.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="broken-reference" alt=""><figcaption></figcaption></figure>
 
 Now we ask `davina.ns.cloudflare.com.` what is the value of entry A of the domain `www.crowsec.com.br`.
 
-<figure><img src="../../.gitbook/assets/dns-4-2.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="broken-reference" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/dns-4-1.png" alt=""><figcaption></figcaption></figure>

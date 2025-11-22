@@ -59,11 +59,9 @@ Podemos primeiro enumerar os subdomínios da aplicação com o subfinder
 <figure><img src="../.gitbook/assets/subfinder.png" alt=""><figcaption></figcaption></figure>
 
 Depois usamos o httpx para fazer uma conexão em cada subdóminios e verificar se está ativo ou não.\
-Podemos usar o parâmetro -path para testar diretórios que quisermos, exemplo: `-path /admin/`&#x20;
+Podemos usar o parâmetro -path para testar diretórios que quisermos, exemplo: `-path /admin/`
 
-
-
-<figure><img src="../.gitbook/assets/httpx (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="broken-reference" alt=""><figcaption></figcaption></figure>
 
 E agora podemos unir com o gau para descobrir quais urls existem dentro de cada subdomínio.
 
