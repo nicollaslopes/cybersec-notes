@@ -10,6 +10,7 @@ There is something in TCP called `Connection Reuse`. Let's imagine a scenario wh
 
 ```
 POST / HTTP/1.1
+Connection: keep-alive
 ```
 
 ```
@@ -68,9 +69,9 @@ With this, we can send both headers and whoever is processing this request will 
 
 That way we are adding a prefix to the request from another user who is accessing the website. This will work when the Load Balancer ignores the `Transfer-Encoding`, prioritizing the `Content-Length`, and the back-end prioritizes the `Transfer-Encoding`. We then have a `CL.TE`.
 
-Existem algumas formas em determinados cenarios para que o load balancer ignore o transfer-enconding para que o backend o receba. Por ex:
+Existem algumas formas em determinados cenarios para que o load balancer ignore o transfer-encoding para que o backend o receba. Por ex:
 
-* colocando um espaco antes do transfer-encondig
+* colocando um espaco antes do transfer-encoding
 * colocar um espaco a mais antes do chunked
 * colocar um caractere especial antes do chunked
 
@@ -107,6 +108,16 @@ Podemos visualizar na imagem abaixo como que ficaria a requisicao com mais detal
 
 <figure><img src="../.gitbook/assets/5.png" alt=""><figcaption></figcaption></figure>
 
+### Lab: HTTP request smuggling, confirming a TE.CL vulnerability via differential responses
+
+The reason this technique works is because when we send the first request when it arrives at the front-end server (if the front-end is using Transfer-encoding `chunked`) it will read in a chunk size of three bytes `ABC` followed by the next chunk size `X` which is a invalid chunk size. So the front-end will simply reject our request and respond with an invalid request error and that show us that the front-end server might be using Transfer-encoding `chunked`.
+
+6png
+
+Then we we follow that up with the second request when that arrives at the front-end server because it's using the Transfer-encoding `chunked`. We sent an `X` after the terminating chunk and it will drop off that `X` because it thinks that the request has ended after the terminating chunk and then forward on the request to the back-end server. The back-end server in turn if it's using Content-Length, and we set a Content-Length of six but the body at this point only include five bytes `0\r\n\r\rn` of content because of the dropped X here so the back-end server will be waiting for byte number six to come in until the back-end server decides to time out our request. If we get back a timeout error for this request  then that confirms to us or it's a indication that this endpoint is vulnerable to TE.CL attack.
+
+7png
+
 Nos enviamos 94 caracteres e precisamos passar como hexadecimal `5e` (0x5e)
 
 ```
@@ -126,6 +137,3 @@ a=1
 
 ```
 
-### Lab: HTTP request smuggling, confirming a TE.CL vulnerability via differential responses
-
-The reason this technique works is because when we send the first request when it arrives at the front-end server (if the front-end is using Transfer-encoding `chunked`) it will read in a chunk size of three `ABC` followed by the next chunk size `X` which is a invalid chunk size. So the front-end will simply reject our request and respond with an invalid request error and that show us that the front-end server might be using Transfer-encoding `chunked`.
