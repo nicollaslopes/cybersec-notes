@@ -73,9 +73,9 @@ Existem algumas formas em determinados cenarios para que o load balancer ignore 
 * colocar um espaco a mais antes do chunked
 * colocar um caractere especial antes do chunked
 
-# Portswigger Lab
+## Portswigger Lab
 
-## Lab: HTTP request smuggling, confirming a CL.TE vulnerability via differential responses
+### Lab: HTTP request smuggling, confirming a CL.TE vulnerability via differential responses
 
 This lab involves a front-end and back-end server, and the front-end server doesn't support chunked encoding. To solve the lab, smuggle a request to the back-end server, so that a subsequent request for `/` (the web root) triggers a 404 Not Found response.
 
@@ -126,6 +126,6 @@ a=1
 
 ```
 
-## Lab: HTTP request smuggling, confirming a TE.CL vulnerability via differential responses
+### Lab: HTTP request smuggling, confirming a TE.CL vulnerability via differential responses
 
 The reason this technique works is because when we send the first request when it arrives at the front-end server (if the front-end is using Transfer-encoding `chunked`) it will read in a chunk size of three `ABC` followed by the next chunk size `X` which is a invalid chunk size. So the front-end will simply reject our request and respond with an invalid request error and that show us that the front-end server might be using Transfer-encoding `chunked`.
