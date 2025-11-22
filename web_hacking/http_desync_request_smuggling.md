@@ -112,28 +112,30 @@ Podemos visualizar na imagem abaixo como que ficaria a requisicao com mais detal
 
 The reason this technique works is because when we send the first request when it arrives at the front-end server (if the front-end is using Transfer-encoding `chunked`) it will read in a chunk size of three bytes `ABC` followed by the next chunk size `X` which is a invalid chunk size. So the front-end will simply reject our request and respond with an invalid request error and that show us that the front-end server might be using Transfer-encoding `chunked`.
 
-6png
+<figure><img src="../.gitbook/assets/6.png" alt=""><figcaption></figcaption></figure>
 
-Then we we follow that up with the second request when that arrives at the front-end server because it's using the Transfer-encoding `chunked`. We sent an `X` after the terminating chunk and it will drop off that `X` because it thinks that the request has ended after the terminating chunk and then forward on the request to the back-end server. The back-end server in turn if it's using Content-Length, and we set a Content-Length of six but the body at this point only include five bytes `0\r\n\r\rn` of content because of the dropped X here so the back-end server will be waiting for byte number six to come in until the back-end server decides to time out our request. If we get back a timeout error for this request  then that confirms to us or it's a indication that this endpoint is vulnerable to TE.CL attack.
+<figure><img src="../.gitbook/assets/7.png" alt=""><figcaption></figcaption></figure>
 
-7png
+Then we we follow that up with the second request when that arrives at the front-end server because it's using the Transfer-encoding `chunked`. We sent an `X` after the terminating chunk and it will drop off that `X` because it thinks that the request has ended after the terminating chunk and then forward on the request to the back-end server. The back-end server in turn if it's using Content-Length, and we set a Content-Length of six but the body at this point only include five bytes `0\r\n\r\rn` of content because of the dropped X here so the back-end server will be waiting for byte number six to come in until the back-end server decides to time out our request. If we get back a timeout error for this request then that confirms to us or it's a indication that this endpoint is vulnerable to TE.CL attack.
 
-Nos enviamos 94 caracteres e precisamos passar como hexadecimal `5e` (0x5e)
+<figure><img src="../.gitbook/assets/8 (1).png" alt=""><figcaption></figcaption></figure>
 
-```
-POST / HTTP/1.1
-Host: 0a0e002d03a32c1e83bdec4d003a0089.web-security-academy.net
-Content-Type: application/x-www-form-urlencoded
-Content-Length: 4
-Transfer-Encoding: chunked
+<figure><img src="../.gitbook/assets/9.png" alt=""><figcaption></figcaption></figure>
 
-5e
-POST /AAA HTTP/1.1
-Content-Type: application/x-www-form-urlencoded
-Content-Length: 11
+For the user to receive a 404 status, we need to do a few things:&#x20;
 
-a=1
-0
+* &#x20;Change the HTTP version to 1.1
+* Uncheck the option "Update Content-Length"
+* Change request method to POST
 
-```
+<figure><img src="../.gitbook/assets/lab-2-1.png" alt=""><figcaption></figcaption></figure>
 
+<figure><img src="../.gitbook/assets/lab-2-2.png" alt=""><figcaption></figcaption></figure>
+
+So we have:
+
+<figure><img src="../.gitbook/assets/lab-2-3.png" alt=""><figcaption></figcaption></figure>
+
+Now we need to define the Transfer-Encoding length (5e), ​​since we are sending 94 characters and it needs to be hexadecimal (0x5e means 94).
+
+<figure><img src="../.gitbook/assets/lab-2-4.png" alt=""><figcaption></figcaption></figure>
