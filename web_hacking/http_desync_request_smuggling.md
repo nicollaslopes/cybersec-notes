@@ -69,11 +69,11 @@ With this, we can send both headers and whoever is processing this request will 
 
 That way we are adding a prefix to the request from another user who is accessing the website. This will work when the Load Balancer ignores the `Transfer-Encoding`, prioritizing the `Content-Length`, and the back-end prioritizes the `Transfer-Encoding`. We then have a `CL.TE`.
 
-Existem algumas formas em determinados cenarios para que o load balancer ignore o transfer-encoding para que o backend o receba. Por ex:
+In certain scenarios, there are some ways to make the load balancer ignore Transfer-encoding so that the back-end receives it. For example:
 
-* colocando um espaco antes do transfer-encoding
-* colocar um espaco a mais antes do chunked
-* colocar um caractere especial antes do chunked
+* adding a space before transfer encoding
+* adding an extra space before chunked encoding
+* adding a special character before chunked encoding
 
 ## Portswigger Lab
 
@@ -81,13 +81,13 @@ Existem algumas formas em determinados cenarios para que o load balancer ignore 
 
 This lab involves a front-end and back-end server, and the front-end server doesn't support chunked encoding. To solve the lab, smuggle a request to the back-end server, so that a subsequent request for `/` (the web root) triggers a 404 Not Found response.
 
-Quando enviamos uma requiscao para a raiz do site, temos a seguinte pagina
+When we send a request to the site's root, we get the following page.
 
 <figure><img src="../.gitbook/assets/lab-1-1.png" alt=""><figcaption></figcaption></figure>
 
-Para fazer esse cenario funcionar, primeiro precisamos de alterar manualmente a versao do HTTP/2 para HTTP/1.1 em Request attributes.
+To make this scenario work, we first need to manually change the HTTP/2 version to HTTP/1.1 in Request attributes.
 
-Nesse caso, temos que enviar uma requisicao POST, adicionando no corpo da requisicao
+In this case, we have to send a POST request, adding the following to the request body:
 
 ```
 Transfer-Encoding: chunked
@@ -100,11 +100,12 @@ B-Ignore: C
 
 <figure><img src="../.gitbook/assets/lab-1-2 (1).png" alt=""><figcaption></figcaption></figure>
 
-Depois de fazermos isso, o proximo usuario ao acessar o site, ira receber um erro 404.
+After we do this, the next user accessing the site will receive a 404 error.
 
 <figure><img src="../.gitbook/assets/lab-1-3 (2).png" alt=""><figcaption></figcaption></figure>
 
-Podemos visualizar na imagem abaixo como que ficaria a requisicao com mais detalhes. Eh importante lembrar que depois de enviar o `B-Ignore: C`, nao ha uma quebra de linha com `\r\n` pois eh importante concatenar (append) a informacao com a requisicao do usuario, para ter sucesso e a requisicao nao ter sucesso, retornando o 404.
+
+We can see in the image below what the request would look like in more detail. It's important to remember that after sending `B-Ignore: C`, there is NO line break with `\r\n` because it's important to concatenate (append) the information to the user's request, so that it succeeds and the request fails, returning a 404 error.
 
 <figure><img src="../.gitbook/assets/5.png" alt=""><figcaption></figcaption></figure>
 
