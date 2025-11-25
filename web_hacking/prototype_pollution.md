@@ -123,7 +123,4 @@ function merge(target, source) {
 
 ## Client-Side Prototype Pollution Payloads
 
-[[client-side-prototype-pollution](https://github.com/BlackFan/client-side-prototype-pollution)](https://github.com/BlackFan/client-side-prototype-pollution#client-side-prototype-pollution)
-
-
-
+[client-side-prototype-pollution](https://github.com/BlackFan/client-side-prototype-pollution#client-side-prototype-pollution)
