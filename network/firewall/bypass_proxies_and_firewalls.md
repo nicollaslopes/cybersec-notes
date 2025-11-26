@@ -38,8 +38,6 @@ On my operation system or directly on browser, I look for proxy configuration, b
 
 O serviço sshd de lá recebe os pacotes que vieram pelo túnel e navega usando a internet da Digital Ocean, que tá toda aberta. O site que eu quis navegar devolve a resposta HTTP pro servidor, e o ssd redireciona o pacote de volta pra mim pelo mesmo túnel. E assim eu burlo toda tentativa de me restringir de navegar. Posso navegar onde quiser. Mesmo a saída da porta 80 na empresa estando fechada por firewall, mesmo sendo instruído a usar o servidor de proxy da empresa, eu criei o meu próprio servidor de proxy saindo por uma porta alta que provavelmente tá aberta no firewall e passei a navegar sem restrição nenhuma. Isso é um exemplo do que se chama de tunelamento.
 
-<figure><img src="../../assetss/ssh.png" alt=""><figcaption></figcaption></figure>
-
 {% embed url="https://builtin.com/software-engineering-perspectives/ssh-port-forwarding" %}
 
 {% embed url="https://iximiuz.com/en/posts/ssh-tunnels/" %}
