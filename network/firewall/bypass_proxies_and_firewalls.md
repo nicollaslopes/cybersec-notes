@@ -34,7 +34,7 @@ Options like `-q` is quiet mode, so it doesn't print anything on terminal, `-C` 
 
 On my operation system or directly on browser, I look for proxy configuration, but instead of setting the company's proxy address, I set localhost and port `1337`. I can now browse any website I want, even if the company thinks it's blocking me. What I did was create a tunnel via SSH, that is exported as a SOCKS5 service, which is a protocol of a web proxy, listening on port `1337` on my local machine. I made a personal proxy, who receives HTTP packets normally, like a web server, except that it forwards, redirect the traffic, to my digital Ocean server via encrypted tunnel via SSH.
 
-<figure><img src="../assets/network/firewall/bypass_proxies_and_firewalls/ssh.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../assets/network/firewall/bypass_proxies_and_firewalls/ssh.png" alt=""><figcaption></figcaption></figure>
 
 O serviço sshd de lá recebe os pacotes que vieram pelo túnel e navega usando a internet da Digital Ocean, que tá toda aberta. O site que eu quis navegar devolve a resposta HTTP pro servidor, e o ssd redireciona o pacote de volta pra mim pelo mesmo túnel. E assim eu burlo toda tentativa de me restringir de navegar. Posso navegar onde quiser. Mesmo a saída da porta 80 na empresa estando fechada por firewall, mesmo sendo instruído a usar o servidor de proxy da empresa, eu criei o meu próprio servidor de proxy saindo por uma porta alta que provavelmente tá aberta no firewall e passei a navegar sem restrição nenhuma. Isso é um exemplo do que se chama de tunelamento.
 
