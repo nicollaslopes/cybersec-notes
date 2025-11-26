@@ -10,13 +10,13 @@ Different networks can communicate with each other through a Router. The router 
 
 "Computer A" wants to communicate with the Web Server `10.10.0.50`, but it does not have access to this network. Therefore, the gateway will be responsible for sending the packet to its network interface that has access to another network.
 
-<figure><img src="../.gitbook/assets/route-1.png" alt=""><figcaption><p>192.168.0.62 (Computer A) -> 192.168.0.1 (Router)<br>192.168.0.1 (Router) -> 10.10.01 (Router)<br>10.10.01 (Router) -> 10.10.0.50 (Web Server)</p></figcaption></figure>
+<figure><img src="../assets/network/route/route-1.png" alt=""><figcaption><p>192.168.0.62 (Computer A) -> 192.168.0.1 (Router)<br>192.168.0.1 (Router) -> 10.10.01 (Router)<br>10.10.01 (Router) -> 10.10.0.50 (Web Server)</p></figcaption></figure>
 
 In the middle of this communication, there is a firewall, which basically works to control a network, allowing, denying or blocking access.
 
 In this example below, we can “simulate” a rule in the firewall where "computer A" can access the database server because there is a rule in the firewall that allows this access.
 
-<figure><img src="../.gitbook/assets/route-2.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/network/route/route-2.png" alt=""><figcaption></figcaption></figure>
 
 Note: there is no reason to place any edge firewall rule within computers on the same network (e.g.: "Notebook" communicating with "Computer A") because this will not be filtered by the firewall, that is, communication is done directly between them.
 
@@ -34,13 +34,13 @@ When we make a request to Google, the router also doesn't know Google's address 
 
 The ISP will receive a notification from Google, so Google will notify the provider that if it wants to communicate with the `100.100.250.0/24` network, it needs to send the request to the Google network entry `100.100.250.1`
 
-<figure><img src="../.gitbook/assets/bgp.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/network/route/route-3-bgp.png" alt=""><figcaption></figcaption></figure>
 
 We call this communication between public networks **Autonomous Systems** (AS), because the communication is automatic, there is no one configuring **BGP**. However, this process is done through several routes, it is not directly from the provider to the Google network, we can trace the route with the command `traceroute`.
 
 With the `traceroute` command, we can see all the IPs of the communication, from our computer until it reaches the destination IP, the communication passes through all of them. For example, we can see the communication with a Cloudflare server.
 
-<figure><img src="../.gitbook/assets/traceroute.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/network/route/route-3-traceroute.png" alt=""><figcaption></figcaption></figure>
 
 We can also use the website https://ipinfo.io/ to consult more about each one.
 
@@ -54,7 +54,7 @@ For an **AS** to connect with another **AS** (e.g.: the provider's AS to connect
 
 Our router plays a very important role called **NAT**. We've talked how it works to send a request to Google, but how does Google know where it has to return the packet? Since our IP `192.168.0.63` is a **private network**, it is necessary to translate the internal IP of our network to a **public** **IP**. The internet provider provides a public IP address, usually one address per house.
 
-<figure><img src="broken-reference" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/network/route/route-4-nat.png" alt=""><figcaption></figcaption></figure>
 
 #### Why does NAT exist?
 
