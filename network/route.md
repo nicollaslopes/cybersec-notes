@@ -44,9 +44,9 @@ With the `traceroute` command, we can see all the IPs of the communication, from
 
 We can also use the website https://ipinfo.io/ to consult more about each one.
 
-We can see all **Claro** networks, which is a provider on the website; https://bgp.he.net/AS4230#\_prefixes
+We can see all **Claro** networks, which is a provider on the website: {% embed url="https://bgp.he.net/AS4230#\_prefixes" %}
 
-**Claro** has direct connection with several networks: https://bgp.he.net/AS4230#\_peers
+**Claro** has direct connection with several networks: {% embed url="https://bgp.he.net/AS4230#\_peers" %}
 
 For an **AS** to connect with another **AS** (e.g.: the provider's AS to connect with Google's AS), there must be a direct connection, with a cable. There are a fiber optic cables coming from here and connecting there.
 
