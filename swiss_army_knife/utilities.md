@@ -129,7 +129,7 @@ port open
 
 Remember that 0>&1 means that all stdin will be directed to stdout and 2>&1 means that all errors will be directed to stdout.
 
-<figure><img src="../.gitbook/assets/utitilies.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/swiss_army_knife/utilities/std.png" alt=""><figcaption></figcaption></figure>
 
 STDIN - 0\
 STDOUT - 1\
