@@ -15,6 +15,12 @@ Another very essential tool is Web Archive. This site basically maps the cache o
 
 {% embed url="https://web.archive.org" %}
 
+We can use this URL for more results:
+
+```
+https://web.archive.org/cdx/search/cdx=?url=<FULL-URL>/*&output=txt&fl=original
+```
+
 ### Google Hacking
 
 Google hacking is basically using the google search engine to collect sensitive information. Some operators are:
