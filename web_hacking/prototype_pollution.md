@@ -17,7 +17,7 @@ The object `obj` contains two properties called `prop1` and `prop2`. We can
 
 When we try to access a property that doesn’t exist in an object, JS engine tries to look for the property in the prototype of the object. In JavaScript, we can find out what the prototype is, using `Object.getPrototypeOf(obj)` or simply `obj.__proto__`.
 
-im1
+<figure><img src="../assets/web_hacking/protoype_pollution/prototype-pollution-1.png" alt=""><figcaption></figcaption></figure>
 
 Accessing prototype of `obj`
 
@@ -43,7 +43,7 @@ if (user.isAdmin) {
 
 Imagine that we have a prototype pollution that makes it possible to set `Object.prototype.isAdmin = true`. Then, unless the application explicitly assigned any value, `user.isAdmin` is always true!
 
-img2
+<figure><img src="../assets/web_hacking/protoype_pollution/prototype-pollution-2.png" alt=""><figcaption></figcaption></figure>
 
 `user.isAdmin` is `true`!
 

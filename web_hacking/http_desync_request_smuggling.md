@@ -22,13 +22,13 @@ The connection `close` indicates that the request will open a connection to the 
 
 When is set the flag `keep-alive`, the connection is reused, meaning that when a new request is made, the Load Balancer will use the same connection and it will remain open. This is more advantageous in terms of connection speed.
 
-In some cases, when is the Load Balancer controls the `Connection Ruse` or `keep-alive`, it can reuse the same connection to process request from different users, and this is where we can find the risk.
+In some cases, when is the Load Balancer that controls the `Connection Ruse` or `keep-alive`, it can reuse the same connection to process request from different users, and this is where we can find the risk.
 
-<figure><img src="../.gitbook/assets/1.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/web_hacking/http_desync_request_smuggling/1-desync.png" alt=""><figcaption></figcaption></figure>
 
 What if we could send the extra content? That way, we could to send the additional content that is part of second user's request.
 
-<figure><img src="../.gitbook/assets/2.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/web_hacking/http_desync_request_smuggling/2-desync.png" alt=""><figcaption></figcaption></figure>
 
 That's what desync is. The back-end will process this extra content and understand that next request is from user B, meaning the user A managed to add this content to user B's request. The back-end understands that there are two requests and that at the end A's request. B's request would begin. Therefore, user A has control over the start of the B's HTTP request.
 
@@ -63,9 +63,9 @@ There is a way to perform this desynchronization. The following is specified in 
 
 With this, we can send both headers and whoever is processing this request will be prioritize the `Transfer-Encoding`. So, since the `Transfer-Encoding` is `chunked` and has a 0, it will understand that the request has ended and there is no more content. The character `T` passed by Load Balancer is the beginning of the next new request.
 
-<figure><img src="../.gitbook/assets/3 (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/web_hacking/http_desync_request_smuggling/3-desync.png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../.gitbook/assets/4.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/web_hacking/http_desync_request_smuggling/4-desync.png" alt=""><figcaption></figcaption></figure>
 
 That way we are adding a prefix to the request from another user who is accessing the website. This will work when the Load Balancer ignores the `Transfer-Encoding`, prioritizing the `Content-Length`, and the back-end prioritizes the `Transfer-Encoding`. We then have a `CL.TE`.
 
@@ -83,7 +83,7 @@ This lab involves a front-end and back-end server, and the front-end server does
 
 When we send a request to the site's root, we get the following page.
 
-<figure><img src="../.gitbook/assets/lab-1-1.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/web_hacking/http_desync_request_smuggling/lab-1-1.png" alt=""><figcaption></figcaption></figure>
 
 To make this scenario work, we first need to manually change the HTTP/2 version to HTTP/1.1 in Request attributes.
 
@@ -98,30 +98,30 @@ GET /AAAA HTTP/1.1\r\n
 B-Ignore: C
 ```
 
-<figure><img src="../.gitbook/assets/lab-1-2 (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/web_hacking/http_desync_request_smuggling/lab-1-2.png" alt=""><figcaption></figcaption></figure>
 
 After we do this, the next user accessing the site will receive a 404 error.
 
-<figure><img src="../.gitbook/assets/lab-1-3 (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/web_hacking/http_desync_request_smuggling/lab-1-3.png" alt=""><figcaption></figcaption></figure>
 
 
 We can see in the image below what the request would look like in more detail. It's important to remember that after sending `B-Ignore: C`, there is NO line break with `\r\n` because it's important to concatenate (append) the information to the user's request, so that it succeeds and the request fails, returning a 404 error.
 
-<figure><img src="../.gitbook/assets/5.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/web_hacking/http_desync_request_smuggling/5-desync.png" alt=""><figcaption></figcaption></figure>
 
 ### Lab: HTTP request smuggling, confirming a TE.CL vulnerability via differential responses
 
 The reason this technique works is because when we send the first request when it arrives at the front-end server (if the front-end is using Transfer-encoding `chunked`) it will read in a chunk size of three bytes `ABC` followed by the next chunk size `X` which is a invalid chunk size. So the front-end will simply reject our request and respond with an invalid request error and that show us that the front-end server might be using Transfer-encoding `chunked`.
 
-<figure><img src="../.gitbook/assets/6.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/web_hacking/http_desync_request_smuggling/6-desync.png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../.gitbook/assets/7.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/web_hacking/http_desync_request_smuggling/7-desync.png" alt=""><figcaption></figcaption></figure>
 
 Then we we follow that up with the second request when that arrives at the front-end server because it's using the Transfer-encoding `chunked`. We sent an `X` after the terminating chunk and it will drop off that `X` because it thinks that the request has ended after the terminating chunk and then forward on the request to the back-end server. The back-end server in turn if it's using Content-Length, and we set a Content-Length of six but the body at this point only include five bytes `0\r\n\r\rn` of content because of the dropped X here so the back-end server will be waiting for byte number six to come in until the back-end server decides to time out our request. If we get back a timeout error for this request then that confirms to us or it's a indication that this endpoint is vulnerable to TE.CL attack.
 
-<figure><img src="../.gitbook/assets/8 (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/web_hacking/http_desync_request_smuggling/8-desync.png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../.gitbook/assets/9.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/web_hacking/http_desync_request_smuggling/9-desync.png" alt=""><figcaption></figcaption></figure>
 
 For the user to receive a 404 status, we need to do a few things:
 
@@ -129,15 +129,15 @@ For the user to receive a 404 status, we need to do a few things:
 * Uncheck the option "Update Content-Length"
 * Change request method to POST
 
-<figure><img src="../.gitbook/assets/lab-2-1.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/web_hacking/http_desync_request_smuggling/lab-2-1.png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../.gitbook/assets/lab-2-2.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/web_hacking/http_desync_request_smuggling/lab-2-2.png" alt=""><figcaption></figcaption></figure>
 
 So we have:
 
-<figure><img src="../.gitbook/assets/lab-2-3.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/web_hacking/http_desync_request_smuggling/lab-2-3.png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../.gitbook/assets/lab-2-4.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/web_hacking/http_desync_request_smuggling/lab-2-4.png" alt=""><figcaption></figcaption></figure>
 
 The front-end is using chunked transfer encoding, so it will send the entire body, which contains our smuggle request, to a page that doesn't exist. That's why we send the terminate chunk `0\r\n\r\n` at the end, ensuring that the entire request body is forwarded onward.
 
@@ -147,4 +147,4 @@ The back-end server is using Content-Length and we've set as a `4`, it thinks th
 
 Then it's poisoned by that prefix (in orange). We've set a Content-Length of `11` in the smuggle request because the content size in the request body is `10`, including everything from `x=1` up to the last `\r\n`. When the back-end server receives a new request that has been poisoned, it will wait for 1 byte of content (we can define more than 1 byte) and therefore everything that comes after the "G" in the "GET" method will be ignored or discarded, depending on the implementation.
 
-<figure><img src="../.gitbook/assets/10.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/web_hacking/http_desync_request_smuggling/10-desync.png" alt=""><figcaption></figcaption></figure>

@@ -12,7 +12,7 @@ Once you have detected the template injection potential, the next step is to ide
 
 A common way of doing this is to inject arbitrary mathematical operations using syntax from different template engines. You can then observe whether they are successfully evaluated. To help with this process, you can use a decision tree similar to the following:
 
-<figure><img src="../.gitbook/assets/ssti-1.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/web_hacking/ssti/ssti-1.png" alt=""><figcaption></figcaption></figure>
 
 You should be aware that the same payload can sometimes return a successful response in more than one template language. For example, the payload `{{7*'7'}}` returns `49` in Twig and `7777777` in Jinja2. Therefore, it is important not to jump to conclusions based on a single successful response.
 
@@ -55,7 +55,7 @@ http://10.10.0.7/?email={{_self.env.registerUndefinedFucntionCallback('system')}
 [<class 'type'>, <class 'async_generator'>, <class 'bytearray_iterator'>, <class 'bytearray'>...
 ```
 
-img jinja2
+<figure><img src="../assets/web_hacking/ssti/ssti-jinja-1.png" alt=""><figcaption></figcaption></figure>
 
 ```
 >>> string.__class__.mro()[1].__subclasses__()[155]

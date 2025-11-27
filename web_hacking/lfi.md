@@ -39,11 +39,11 @@ Em aplicações mais antigas onde é adicionado uma extensão no final do arquiv
 
 Vamos pegar esse exemplo dessa aplicação que adiciona a extensão `.php` no final do arquivo que é passado pelo parâmetro `page`. Se passarmos o parâmetro `test`, irá ficar dessa forma:
 
-<figure><img src="../.gitbook/assets/lfi-1.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/web_hacking/lfi/lfi-1.png" alt=""><figcaption></figcaption></figure>
 
 Agora, utilizando o PHP Wrapper `data://`, conseguimos burlar isso:
 
-<figure><img src="../.gitbook/assets/lfi-2.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/web_hacking/lfi/lfi-2.png" alt=""><figcaption></figcaption></figure>
 
 Podemos também encodar em base64:
 
@@ -52,7 +52,7 @@ $ echo -n "test" | base64
 dGVzdA==
 ```
 
-<figure><img src="../.gitbook/assets/lfi-3.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/web_hacking/lfi/lfi-3.png" alt=""><figcaption></figcaption></figure>
 
 Com isso, nós conseguimos também executar comandos do sistema operacional:
 
@@ -61,7 +61,7 @@ $ echo -n "<?php system('id'); ?>" | base64
 PD9waHAgc3lzdGVtKCdpZCcpOyA/Pg==
 ```
 
-<figure><img src="../.gitbook/assets/lfi-4.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/web_hacking/lfi/lfi-4.png" alt=""><figcaption></figcaption></figure>
 
 https://medium.com/@zoningxtr/mastering-php-wrappers-concepts-use-cases-and-security-risks-380bb59cb6c1
 

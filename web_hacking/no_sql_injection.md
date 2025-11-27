@@ -46,21 +46,21 @@ NoSQL databases often use query operators, which provide ways to specify conditi
 
 First, we need to understand how we can retrieve a data in NoSQL database. Here's how we do it:
 
-<figure><img src="../.gitbook/assets/no_sql_injection_1.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/web_hacking/no_sql_injection/no_sql_injection_1.png" alt=""><figcaption></figcaption></figure>
 
 We can also retrieve users other than "user\_2" using the comparison operator `$ne`, that is, it will return all users except this one.
 
-<figure><img src="../.gitbook/assets/no_sql_injection_2.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/web_hacking/no_sql_injection/no_sql_injection_2.png" alt=""><figcaption></figcaption></figure>
 
 The application expects the `user_name` input field to be a string. However, when we change it (either in the browser using devtools or using a proxy) to treat this field as an array, the application will receive this information as an array and consider the key and value. Let's change it in devtools and see how the information is received in the backend.
 
-<figure><img src="../.gitbook/assets/no_sql_injection_3.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/web_hacking/no_sql_injection/no_sql_injection_3.png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../.gitbook/assets/no_sql_injection_4.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/web_hacking/no_sql_injection/no_sql_injection_4.png" alt=""><figcaption></figcaption></figure>
 
 This way, we can inject the `$ne` operator to check if the application is vulnerable and return some value.
 
-<figure><img src="../.gitbook/assets/no_sql_injection_5.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/web_hacking/no_sql_injection/no_sql_injection_5.png" alt=""><figcaption></figcaption></figure>
 
 We can confirm that the application is vulnerable to NoSQL injection! We were able to log in with the "admin" user because it's the first user in the `users` table.
 
@@ -68,7 +68,7 @@ In JSON messages, you can insert query operators as nested objects. For example,
 
 For URL-based inputs, you can insert query operators via URL parameters. For example, `user_name=user_2` becomes `user_name[$ne]=non_existent_user`. Let's use a proxy.
 
-<figure><img src="../.gitbook/assets/no_sql_injection_6.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/web_hacking/no_sql_injection/no_sql_injection_6.png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../.gitbook/assets/no_sql_injection_7.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/web_hacking/no_sql_injection/no_sql_injection_7.png" alt=""><figcaption></figcaption></figure>
 

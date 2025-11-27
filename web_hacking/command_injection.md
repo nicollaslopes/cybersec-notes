@@ -4,11 +4,11 @@ O command injection é uma vulnerabilidade web que permite que seja executado um
 
 Vamos supor que uma aplicação web possui um página que basicamente faz o ping para um determinado host/ip, se não tiver algum tratamento ou filtro é possível concatenar algum outro comando para que seja executado. Ou seja, além do comando `ping` que será executado, podemos concatenar com `;` `|` ou `&&` para bypassar.
 
-<figure><img src="../.gitbook/assets/command-injection-1.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/web_hacking/command_injection/command-injection-1.png" alt=""><figcaption></figcaption></figure>
 
 Como podemos ver, ao passarmos um IP, a aplicação está executando o comando `ping` enviando 4 pacotes para o alvo. Agora podemos aproveitar disso para executar outro comando que não é esperado, vamos tentar utilizar o `ls` para listar o conteúdo dos arquivos diretamente no servidor.
 
-<figure><img src="../.gitbook/assets/command-injection-2.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/web_hacking/command_injection/command-injection-2.png" alt=""><figcaption></figcaption></figure>
 
 Conseguimos executar o comando com sucesso. Podemos ver que o código no backend está da seguinte forma.
 
