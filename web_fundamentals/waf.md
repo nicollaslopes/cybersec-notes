@@ -6,6 +6,8 @@ WAF helps protect web applications by filtering and monitoring HTTP traffic betw
 
 By deploying a WAF in front of the web application, a shield is places between the application and the internet. While a proxy server protects the identity of the client machine using an intermediary, WAF is a type of reverse proxy that protects the server from exposure, as requests pass through the WAF before reaching the server. 
 
+<figure><img src="../assets/web_fundamentals/waf/waf.jpg" alt=""><figcaption></figcaption></figure>
+
 ## Identifying WAF
 
 Uma outra forma de identificarmos um WAF, é utilizando uma ferramenta chamada `wafw00f`.
