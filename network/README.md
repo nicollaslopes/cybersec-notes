@@ -20,7 +20,7 @@ The OSI Model (Open Systems Interconnection) is a conceptual model made up of 7 
 
 The TCP/IP Model consists of 4 layers and has become a simplification of the OSI model.
 
-<figure><img src="../.gitbook/assets/osi-model.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/network/osi-model.png" alt=""><figcaption></figcaption></figure>
 
 
 https://www.guiafoca.org/guiaonline/avancado/ch04s02.html
