@@ -1,0 +1,223 @@
+# Assembly
+
+Existem duas sintaxes diferentes para programar em assembly (Intel ou AT&T)
+
+Algumas diferencas entre elas:
+
+
+```
+Intel:                              | AT&T:
+						            |
+	        destino    <-   origem  |                 origem    ->   destino 
+MOV           EAX,            3     |   MOVL           $0x3,           %eax
+                                    |
+                                    | 
+xor      eax,eax                    |   xor      %eax,%eax  
+mov      eax,0x2328                 |   mov      %0x2328,%eax
+push     eax                        |   push     %eax
+mov      ebx,0x76129010             |   mov      %0x76129010,%ebx
+call     ebx                        |   call     %ebx
+```
+
+Na AT&T usamos % para registradores e $ para numeros e podemos definid
+
+
+## Exemplos de instrucoes
+
+* MOV 
+* ADD 
+* SUB 
+* INC 
+* DEC 
+* CALL 
+* JMP
+* JNE
+* CMP
+* PUSH
+* POP
+* NOP3
+* INT3
+* XOR
+
+
+`_main` pode ser qualquer coisa,
+
+```assembly
+global _main
+
+section .text
+_main:
+	NOP
+	NOP
+	NOP
+	NOP
+	MOV EAX, 41424344h ; ABCD in Hexadecimal
+	MOV BX, 4141h
+	MOV CH, 41h
+	MOV DL, 41h
+	XOR EAX, EAX
+	XOR EBX, EBX
+	XOR ECX, ECX
+	XOR EDX, EDX
+```
+
+```
+nasm -f win32 test.asm
+golink /entry _main test.obj
+```
+
+
+<figure><img src="../assets/low_level_programming/assembly/assembly-1.png" alt=""><figcaption></figcaption></figure>
+
+
+## Assembly Linux x86
+
+
+```asm
+global _main
+
+section .data
+        test: db 'My test text', 0xa
+
+section .text
+
+_main:
+        mov eax, 4
+        mov ebx, 1
+        mov ecx, test
+        mov edx, 13
+        int 0x80
+
+        mov eax, 1
+        mov ebx, 0
+        int 0x80
+```
+
+```
+$ nasm -f elf32 test.asm                      
+$ ld --entry _main -m elf_i386 test.o -o test
+$ ./test                                      
+My test text
+```
+
+
+
+https://syscalls.w3challs.com/?arch=x86
+https://syscalls.w3challs.com/?arch=x86_64
+
+## Assembly linux x64
+
+
+```
+global _main
+
+section .data
+        msg: db "my code", 0xa
+
+section .text
+
+_main:
+        mov rax, 1
+        mov rdi, 1
+        mov rsi, msg
+        mov rdx, 8
+        syscall
+
+        mov rax, 60
+        mov rdi, 0
+        syscall
+
+```
+
+```
+$ nasm -f elf64 code2.asm
+$ ld --entry _main code2.o -o code2 
+$ ls                               
+code2  code2.asm  code2.o
+$ ./code2 
+my code
+```
+
+Using strace
+
+```
+$ strace ./code2                   
+execve("./code2", ["./code2"], 0x7ffe1ead1ae0 /* 56 vars */) = 0
+write(1, "my code\n", 8my code
+)                = 8
+exit(0)                                 = ?
++++ exited with 0 +++
+```
+
+C Code
+
+```
+$ cat code.c   
+#include <stdio.h>
+
+int main() {
+        printf("Hello world!\n");
+        return 0;
+}
+
+```
+
+```
+$ ltrace ./code                             
+puts("Hello world!"Hello world!
+)                                                                                                                               = 13
++++ exited (status 0) +++
+
+```
+
+```
+$ strace ./code 
+execve("./code", ["./code"], 0x7ffdb50b97b0 /* 56 vars */) = 0
+brk(NULL)                               = 0x55be5daa1000
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7fc16f54a000
+access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=102295, ...}) = 0
+mmap(NULL, 102295, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7fc16f531000
+close(3)                                = 0
+openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0000\241\2\0\0\0\0\0"..., 832) = 832
+pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 840, 64) = 840
+fstat(3, {st_mode=S_IFREG|0755, st_size=2014472, ...}) = 0
+pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 840, 64) = 840
+mmap(NULL, 2055760, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7fc16f33b000
+mmap(0x7fc16f363000, 1474560, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x28000) = 0x7fc16f363000
+mmap(0x7fc16f4cb000, 339968, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x190000) = 0x7fc16f4cb000
+mmap(0x7fc16f51e000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1e3000) = 0x7fc16f51e000
+mmap(0x7fc16f524000, 52816, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7fc16f524000
+close(3)                                = 0
+mmap(NULL, 12288, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7fc16f338000
+arch_prctl(ARCH_SET_FS, 0x7fc16f338740) = 0
+set_tid_address(0x7fc16f338a10)         = 42651
+set_robust_list(0x7fc16f338a20, 24)     = 0
+rseq(0x7fc16f338680, 0x20, 0, 0x53053053) = 0
+mprotect(0x7fc16f51e000, 16384, PROT_READ) = 0
+mprotect(0x55be3c118000, 4096, PROT_READ) = 0
+mprotect(0x7fc16f588000, 8192, PROT_READ) = 0
+prlimit64(0, RLIMIT_STACK, NULL, {rlim_cur=8192*1024, rlim_max=RLIM64_INFINITY}) = 0
+getrandom("\xb1\x27\x6f\xa9\xa8\xf8\x82\x62", 8, GRND_NONBLOCK) = 8
+munmap(0x7fc16f531000, 102295)          = 0
+fstat(1, {st_mode=S_IFCHR|0600, st_rdev=makedev(0x88, 0), ...}) = 0
+brk(NULL)                               = 0x55be5daa1000
+brk(0x55be5dac2000)                     = 0x55be5dac2000
+write(1, "Hello world!\n", 13Hello world!
+)          = 13
+exit_group(0)                           = ?
++++ exited with 0 +++
+```
+
+
+podemos ver que nese codigo c, nao chama diretamente o kernel, ele utiliza a libc para chamar o printf
+
+```
+$ ldd code
+        linux-vdso.so.1 (0x00007f3456de3000)
+        libc.so.6 => /usr/lib/x86_64-linux-gnu/libc.so.6 (0x00007f3456bc7000)
+        /lib64/ld-linux-x86-64.so.2 (0x00007f3456de5000)
+```
+
